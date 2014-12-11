@@ -27,6 +27,7 @@ public class User {
 			statement = connexion.createStatement();
 			int status = statement.executeUpdate(
 					"CREATE TABLE user (id int(11) NOT NULL auto_increment, firstname varchar(255) NOT NULL, lastname varchar(255) NOT NULL, email varchar(255) NOT NULL, date date DEFAULT '00-00-0000' NOT NULL, PRIMARY KEY (id), KEY id (id), UNIQUE id_2 (id) );");			
+			System.out.println("statut -> " + status);
 			int statut = statement
 					.executeUpdate("INSERT INTO user (firstname, lastname, email, password, date_inscription) "
 							+ "VALUES ('"
@@ -38,6 +39,7 @@ public class User {
 							+ "', MD5('"
 							+ password
 							+ "'), NOW());");
+			System.out.println("statut -> " + statut);
 				
 
 		} catch (SQLException e) {

@@ -1,9 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,6 +16,8 @@ public class Inscription extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
+		
+		
 		
 		String firstname = request.getParameter("firstname");
 		String lastname = request.getParameter("lastname");
@@ -43,7 +42,7 @@ public class Inscription extends HttpServlet {
 		// The attribute will be a name/value pair, the value in this case will
 		// be a List object
 		// request.setAttribute("styles", result);
-		RequestDispatcher view = request.getRequestDispatcher("result.jsp");
-		view.forward(request, response);
+		//RequestDispatcher view = request.getRequestDispatcher("result.jsp");
+		//view.forward(request, response);
 	}
 }
