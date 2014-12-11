@@ -34,11 +34,10 @@ h1.title {
 	float: right;
 }
 
-.subscribe {
-	position: absolute;
-	left: 10%;
-	bottom: 50%;
+.container-elem-index
+{
 	width: 320px;
+	margin: 10px;
 	padding: 5px;
 	background-color: #ededed;
 	border: 1px solid #712124;

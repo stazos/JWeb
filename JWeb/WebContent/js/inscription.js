@@ -9,7 +9,7 @@ function validateForm() {
 	var password = document.forms["Form"]["password"].value;
 	var validPassword = document.forms["Form"]["validPassword"].value;
 	
-	if (firstname == null || firstname == "", lastname == null || lastname == "", email == null || email == "", day == null || day == "", month == null || month == "", year == null || year == "", password == null || password == "", validPassword == null || validPassword == "")
+	if (firstname == null || firstname == "" && lastname == null || lastname == "", email == null || email == "", password == null || password == "", validPassword == null || validPassword == "")
 		return false;
 	if (validPassword != password)
 	{
@@ -22,5 +22,4 @@ function validateForm() {
 				}, 3000);
 		return false;
 	}
-	
 }
