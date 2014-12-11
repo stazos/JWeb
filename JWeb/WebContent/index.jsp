@@ -1,57 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
-	import="java.sql.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href='http://fonts.googleapis.com/css?family=Marck+Script'
+	rel='stylesheet' type='text/css'>
+<link type="text/css" rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css" />
+
 <title>Insert title here</title>
 </head>
 <body>
-	<%
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			System.out.println(e.getMessage());
-		}
-	%>
-	Hello! The time is now
-	<%
-		/* Connexion à la base de données */
-		String url = "jdbc:mysql://localhost/jweb";
-		String utilisateur = "root";
-		String motDePasse = "admin";
-		Connection connexion = null;
-		try {
-			connexion = DriverManager.getConnection(url, utilisateur,
-					motDePasse);
-			/* Création de l'objet gérant les requêtes */
-			Statement statement = connexion.createStatement();
-			
-			/* Ici, nous placerons nos requêtes vers la BDD */
-			/* ... */
+	<div class="bar-top">
+		<h1 class="title">Luncher - Catalogue</h1>
+		<form class="login" method="POST" action="SelectCoffee.do">
+			<input type="email" class="regular" name="login" placeholder="Email" />
+			<input type="password" class="regular" name="password" placeholder="Mot de passe" />
+			<input type="Submit" value="Connexion" class="small">
+		</form>
+	</div>
+	
+	
+	
+	<div class="subscribe">
+		<center class="sub">
+			<h1>Inscription</h1>
+			<form action="POST" action="SendSubscribe.do">
+				<input type="text" class="regular" name="fistrname" placeholder="Prénom" />
+				<input type="text" class="regular" name="lastname" placeholder="Nom" />
+				<input type="email" name="email" placeholder="JohnDoe@example.com" />
+				<input type="text" class="small" name="fistrname" placeholder="Jour" />
+				<input type="text" class="small" name="fistrname" placeholder="Mois" />
+				<input type="text" class="small" name="fistrname" placeholder="Année" />
+				<input type="Submit" value="Envoyer">
+			</form>
+		</center>
+	</div>
 
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		} finally {
-			if (connexion != null)
-				try {
-					/* Fermeture de la connexion */
-					connexion.close();
-				} catch (SQLException ignore) {
-					/* Si une erreur survient lors de la fermeture, il suffit de l'ignorer. */
-				}
-		}
-	%>
 
-	<%
-		// This scriptlet declares and initializes "date"
-		System.out.println("Evaluating date now");
-		java.util.Date date = new java.util.Date();
-		out.println(date);
-		out.println("<BR>Your machine's address is ");
-		//out.println(request.getRemoteHost());
-	%>
 </body>
 </html>
