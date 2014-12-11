@@ -34,7 +34,17 @@ h1.title {
 	float: right;
 }
 
-.container-elem-index
+.container-inscription
+{
+	width: 320px;
+	margin: 10px;
+	padding: 5px;
+	background-color: #ededed;
+	border: 1px solid #712124;
+	border-radius: 0px;
+}
+
+.container-newsletter
 {
 	width: 320px;
 	margin: 10px;
@@ -43,6 +53,7 @@ h1.title {
 	border: 1px solid #712124;
 	border-radius: 3px;
 }
+
 
 form>input {
 	width: 304px;
