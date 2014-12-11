@@ -22,14 +22,15 @@ public class User {
 		Connection connexion = null;
 		Statement statement = null;
 		try {
+			System.out.println(newsletter);
 			connexion = DriverManager.getConnection(url, utilisateur,
 					motDePasse);
 			statement = connexion.createStatement();
 			int status = statement.executeUpdate(
-					"CREATE TABLE user (id int(11) NOT NULL auto_increment, firstname varchar(255) NOT NULL, lastname varchar(255) NOT NULL, email varchar(255) NOT NULL, password varchar(255) NOT NULL, newsletter bool NOT NULL, date_inscription date DEFAULT '00-00-0000' NOT NULL, PRIMARY KEY (id), KEY id (id), UNIQUE id_2 (id) );");			
+					"CREATE TABLE user (id int(11) NOT NULL auto_increment, firstname varchar(255) NOT NULL, lastname varchar(255) NOT NULL, email varchar(255) NOT NULL, password varchar(255) NOT NULL, newsletter bool DEFAULT false NOT NULL, date_inscription date DEFAULT '00-00-0000' NOT NULL, PRIMARY KEY (id), KEY id (id), UNIQUE id_2 (id) );");			
 			System.out.println("statut -> " + status);
-			int statut = statement
-					.executeUpdate("INSERT INTO user (firstname, lastname, email, password, date_inscription) "
+		
+			System.out.println("INSERT INTO user (firstname, lastname, email, password, newsletter, date_inscription) "
 							+ "VALUES ('"
 							+ firstname
 							+ "', '"
@@ -38,7 +39,22 @@ public class User {
 							+ email
 							+ "', MD5('"
 							+ password
-							+ "'), NOW());");
+							+ "'), "
+							+ newsletter
+							+ ", NOW());");
+			int statut = statement
+					.executeUpdate("INSERT INTO user (firstname, lastname, email, password, newsletter, date_inscription) "
+							+ "VALUES ('"
+							+ firstname
+							+ "', '"
+							+ lastname
+							+ "', '"
+							+ email
+							+ "', MD5('"
+							+ password
+							+ "'), "
+							+ newsletter
+							+ ", NOW());");
 			System.out.println("statut -> " + statut);
 				
 

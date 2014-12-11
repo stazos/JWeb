@@ -36,7 +36,7 @@
 			<input type="email" name="email" placeholder="JohnDoe@example.com" />
 			<input type="password" class="regular" name="password" placeholder="Mot de passe" />
 			<input type="password" class="regular" name="validPassword" placeholder="Validation" />
-			<span><input type="checkbox" name="newsletter"> S'inscrire à la newsletter</span>
+			<span><input type="checkbox" name="newsletter" value=true> S'inscrire à la newsletter</span>
 			<input type="Submit" value="Envoyer">
 		</form>
 	</div>
