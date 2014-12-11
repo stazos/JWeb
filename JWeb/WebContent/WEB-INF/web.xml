@@ -12,14 +12,23 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-	<servlet>
-		<servlet-name>Coffee</servlet-name>
-		<servlet-class>Controller.CoffeeSelect</servlet-class>
-	</servlet>
 
+	<servlet>
+		<servlet-name>Inscription</servlet-name>
+		<servlet-class>controller.Inscription</servlet-class>
+	</servlet>
 	<servlet-mapping>
-		<servlet-name>Coffee</servlet-name>
-		<url-pattern>/SelectCoffee.do</url-pattern>
+		<servlet-name>Inscription</servlet-name>
+		<url-pattern>/inscription.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Connexion</servlet-name>
+		<servlet-class>controller.Connexion</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Connexion</servlet-name>
+		<url-pattern>/connexion.do</url-pattern>
 	</servlet-mapping>
 
 </web-app>

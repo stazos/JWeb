@@ -52,11 +52,9 @@ form>input {
 }
 
 form>input.regular {
-	width: 140px;
-	height: 25px;
+	width: 138px;
 }
 
 form>input.small {
-	width: 85px;
-	height: 25px;
+	width: 83px;
 }
