@@ -10,6 +10,13 @@
 <title>Luncher - Catalogue</title>
 </head>
 <body>
+	<%
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+	%>
 	<div class="bar-top">
 		<h1 class="title">Luncher - Catalogue</h1>
 		<form class="login" method="POST" action="connexion.do">
@@ -29,15 +36,9 @@
 			<input type="email" name="email" placeholder="JohnDoe@example.com" />
 			<input type="password" class="regular" name="password" placeholder="Mot de passe" />
 			<input type="password" class="regular" name="validPassword" placeholder="Validation" />
+			<span><input type="checkbox" name="newsletter"> S'inscrire à la newsletter</span>
 			<input type="Submit" value="Envoyer">
 		</form>
-	</div>
-	<div class="container-newsletter">
-		<center><h1>S'inscrire à la Newsletter</h1></center>
-		<form action="POST" name="Form" action="inscription.do" onsubmit="return validateForm()">
-			<input type="email" name="email" placeholder="JohnDoe@example.com" />
-			<input type="Submit" value="Envoyer">
-		</form>		
 	</div>
 	</center>
 
