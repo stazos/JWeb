@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,27 +20,15 @@ public class Inscription extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		
-		String firstName = request.getParameter("firstName");
-		String lastName = request.getParameter("lastName");
+		String firstname = request.getParameter("firstname");
+		String lastname = request.getParameter("lastname");
 		String email = request.getParameter("email");
-		String bornString = request.getParameter("born");
+		String password = request.getParameter("password");
 
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-
-		Date born = null;
-		try {
-			born = formatter.parse(bornString);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		
 		// Now use our Coffee Model above
-		User user = new User();
-
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		user.setEmail(email);
-		user.setBorn(born);
-
+		User.createUser(firstname, lastname, email, password);
+		
 		// Use the below code to debug the program if you get problems
 		// response.setContentType("text/html"):
 		// PrintWriter out = response.getWriter();
@@ -54,7 +43,7 @@ public class Inscription extends HttpServlet {
 		// The attribute will be a name/value pair, the value in this case will
 		// be a List object
 		// request.setAttribute("styles", result);
-		// RequestDispatcher view = request.getRequestDispatcher("result.jsp");
-		// view.forward(request, response);
+		RequestDispatcher view = request.getRequestDispatcher("result.jsp");
+		view.forward(request, response);
 	}
 }

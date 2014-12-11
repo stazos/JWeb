@@ -13,59 +13,83 @@ public class User {
 	private String email;
 	private Date born;
 	private Boolean admin;
-	
-	public String getFirstName() {
-		/* Connexion à la base de données */
-		String url = "jdbc:mysql://localhost:3306/bdd_sdzee";
-		String utilisateur = "java";
-		String motDePasse = "$dZ_£E";
+
+	static public void createUser(String firstname, String lastname, String email,
+			String password) {
+		String url = "jdbc:mysql://localhost/jweb";
+		String utilisateur = "root";
+		String motDePasse = "admin";
 		Connection connexion = null;
+		Statement statement = null;
 		try {
 			connexion = DriverManager.getConnection(url, utilisateur,
 					motDePasse);
-			/* Création de l'objet gérant les requêtes */
-			Statement statement = connexion.createStatement();
-			/* Ici, nous placerons nos requêtes vers la BDD */
-			/* ... */
+			statement = connexion.createStatement();
+			int status = statement.executeUpdate(
+					"CREATE TABLE user (id int(11) NOT NULL auto_increment, firstname varchar(255) NOT NULL, lastname varchar(255) NOT NULL, email varchar(255) NOT NULL, date date DEFAULT '00-00-0000' NOT NULL, PRIMARY KEY (id), KEY id (id), UNIQUE id_2 (id) );");			
+			int statut = statement
+					.executeUpdate("INSERT INTO user (firstname, lastname, email, password, date_inscription) "
+							+ "VALUES ('"
+							+ firstname
+							+ "', '"
+							+ lastname
+							+ "', '"
+							+ email
+							+ "', MD5('"
+							+ password
+							+ "'), NOW());");
+				
 
 		} catch (SQLException e) {
-			/* Gérer les éventuelles erreurs ici */
+			System.out.println(e.getMessage());
 		} finally {
+			if ( statement != null ) {
+		        try {
+		            /* Puis on ferme le Statement */
+		            statement.close();
+		        } catch ( SQLException ignore ) {
+		        }
+		    }
 			if (connexion != null)
 				try {
-					/* Fermeture de la connexion */
 					connexion.close();
 				} catch (SQLException ignore) {
-					/* Si une erreur survient lors de la fermeture, il suffit de l'ignorer. */
 				}
 		}
-		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public Date getBorn() {
 		return born;
 	}
+
 	public void setBorn(Date born) {
 		this.born = born;
 	}
-	
+
 	public Boolean getAdmin() {
 		return admin;
 	}
+
 	public void setAdmin(Boolean admin) {
 		this.admin = admin;
 	}

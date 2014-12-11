@@ -17,33 +17,6 @@
 		}
 	%>
 	Hello! The time is now
-	<%
-		/* Connexion à la base de données */
-		String url = "jdbc:mysql://localhost/jweb";
-		String utilisateur = "root";
-		String motDePasse = "admin";
-		Connection connexion = null;
-		try {
-			connexion = DriverManager.getConnection(url, utilisateur,
-					motDePasse);
-			/* Création de l'objet gérant les requêtes */
-			Statement statement = connexion.createStatement();
-			
-			/* Ici, nous placerons nos requêtes vers la BDD */
-			/* ... */
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		} finally {
-			if (connexion != null)
-				try {
-					/* Fermeture de la connexion */
-					connexion.close();
-				} catch (SQLException ignore) {
-					/* Si une erreur survient lors de la fermeture, il suffit de l'ignorer. */
-				}
-		}
-	%>
 
 	<%
 		// This scriptlet declares and initializes "date"
