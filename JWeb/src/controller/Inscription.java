@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,10 +22,10 @@ public class Inscription extends HttpServlet {
 		String lastname = request.getParameter("lastname");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-
+		String newsletter = request.getParameter("newsletter");
 		
 		// Now use our Coffee Model above
-		User.createUser(firstname, lastname, email, password);
+		User.createUser(firstname, lastname, email, password, newsletter);
 		
 		// Use the below code to debug the program if you get problems
 		// response.setContentType("text/html"):
