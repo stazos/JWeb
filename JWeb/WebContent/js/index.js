@@ -23,24 +23,25 @@ function sendFormRegister() {
 			document.forms["Form"]["validPassword"].style.border = 'none';
 		}, 3000);
 		return false;
-	} else {
-		$.ajax({
-			url : $this.attr('action'),
-			type : $this.attr('method'),
-			data : $this.serialize(),
-			success : function() {
-				document.forms["Form"]["firstname"].value = "";
-				document.forms["Form"]["lastname"].value = "";
-				document.forms["Form"]["email"].value = "";
-				document.forms["Form"]["password"].value = "";
-				document.forms["Form"]["validPassword"].value = "";
-				alert("Inscription Reussi. Vous pouvez vous connecter.");
-			},
-			error : function(xhr, ajaxOptions, thrownError) {
-				alert(xhr.status);
-				alert(thrownError);
-			}
-		});
-		return false;
+	}
+//	} else {
+//		$.ajax({
+//			url : $this.attr('action'),
+//			type : $this.attr('method'),
+//			data : $this.serialize(),
+//			success : function() {
+//				document.forms["Form"]["firstname"].value = "";
+//				document.forms["Form"]["lastname"].value = "";
+//				document.forms["Form"]["email"].value = "";
+//				document.forms["Form"]["password"].value = "";
+//				document.forms["Form"]["validPassword"].value = "";
+//				alert("Inscription Reussi. Vous pouvez vous connecter.");
+//			},
+//			error : function(xhr, ajaxOptions, thrownError) {
+//				alert(xhr.status);
+//				alert(thrownError);
+//			}
+//		});
+//		return false;
 	}
 }

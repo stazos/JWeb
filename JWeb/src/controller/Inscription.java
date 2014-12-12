@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +17,6 @@ public class Inscription extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		
-		
-		
 		String firstname = request.getParameter("firstname");
 		String lastname = request.getParameter("lastname");
 		String email = request.getParameter("email");
@@ -26,6 +25,7 @@ public class Inscription extends HttpServlet {
 		
 		// Now use our Coffee Model above
 		User.createUser(firstname, lastname, email, password, newsletter);
+		
 		// Use the below code to debug the program if you get problems
 		// response.setContentType("text/html"):
 		// PrintWriter out = response.getWriter();
@@ -42,5 +42,8 @@ public class Inscription extends HttpServlet {
 		// request.setAttribute("styles", result);
 		//RequestDispatcher view = request.getRequestDispatcher("result.jsp");
 		//view.forward(request, response);
+		response.setStatus(200);
+		PrintWriter out = response.getWriter();  
+		out.print("SUCCESS");
 	}
 }

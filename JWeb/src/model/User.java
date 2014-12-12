@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
+import controller.Synchronize;
+
 public class User {
 
 	private String firstName;
@@ -14,8 +16,8 @@ public class User {
 	private Date born;
 	private Boolean admin;
 
-	static public void createUser(String firstname, String lastname, String email,
-			String password, String newsletter) {
+	static public void createUser(String firstname, String lastname,
+			String email, String password, String newsletter) {
 		String url = "jdbc:mysql://localhost/jweb";
 		String utilisateur = "root";
 		String motDePasse = "admin";
@@ -26,48 +28,35 @@ public class User {
 			connexion = DriverManager.getConnection(url, utilisateur,
 					motDePasse);
 			statement = connexion.createStatement();
-			int status = statement.executeUpdate(
-					"CREATE TABLE user (id int(11) NOT NULL auto_increment, firstname varchar(255) NOT NULL, lastname varchar(255) NOT NULL, email varchar(255) NOT NULL, password varchar(255) NOT NULL, newsletter bool DEFAULT false NOT NULL, date_inscription date DEFAULT '00-00-0000' NOT NULL, PRIMARY KEY (id), KEY id (id), UNIQUE id_2 (id) );");			
-			System.out.println("statut -> " + status);
-		
-			System.out.println("INSERT INTO user (firstname, lastname, email, password, newsletter, date_inscription) "
-							+ "VALUES ('"
-							+ firstname
-							+ "', '"
-							+ lastname
-							+ "', '"
-							+ email
-							+ "', MD5('"
-							+ password
-							+ "'), "
-							+ newsletter
-							+ ", NOW());");
-			int statut = statement
-					.executeUpdate("INSERT INTO user (firstname, lastname, email, password, newsletter, date_inscription) "
-							+ "VALUES ('"
-							+ firstname
-							+ "', '"
-							+ lastname
-							+ "', '"
-							+ email
-							+ "', MD5('"
-							+ password
-							+ "'), "
-							+ newsletter
-							+ ", NOW());");
+			String req = "INSERT INTO user (firstname, lastname, email, password, newsletter, date_inscription) "
+					+ "VALUES ('"
+					+ firstname
+					+ "', '"
+					+ lastname
+					+ "', '"
+					+ email
+					+ "', MD5('"
+					+ password
+					+ "'), "
+					+ newsletter
+					+ ", NOW());";
+			String req2 = "INSERT INTO user VALUES (null, '" + firstname
+					+ "', '" + lastname + "', '" + email + "', MD5('"
+					+ password + "'), " + newsletter + ", false , NOW());";
+			System.out.println(req2);
+			int statut = statement.executeUpdate(req2);
 			System.out.println("statut -> " + statut);
-				
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if ( statement != null ) {
-		        try {
-		            /* Puis on ferme le Statement */
-		            statement.close();
-		        } catch ( SQLException ignore ) {
-		        }
-		    }
+			if (statement != null) {
+				try {
+					/* Puis on ferme le Statement */
+					statement.close();
+				} catch (SQLException ignore) {
+				}
+			}
 			if (connexion != null)
 				try {
 					connexion.close();
