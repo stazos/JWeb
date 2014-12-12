@@ -1,0 +1,19 @@
+.admin-module
+{
+	background-color: #ededed;
+	border: 1px solid #712124;
+	border-radius: 10px;
+	padding: 1%;
+	margin: 1%;
+	float: left;
+}
+
+textarea
+{
+	width: 100%;
+}
+
+h1
+{
+	margin-bottom: 10px;
+}
