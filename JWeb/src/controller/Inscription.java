@@ -26,7 +26,6 @@ public class Inscription extends HttpServlet {
 		
 		// Now use our Coffee Model above
 		User.createUser(firstname, lastname, email, password, newsletter);
-		
 		// Use the below code to debug the program if you get problems
 		// response.setContentType("text/html"):
 		// PrintWriter out = response.getWriter();

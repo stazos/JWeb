@@ -1,14 +1,14 @@
 <center>
 	<div class="container-inscription">
 		<center><h1>Inscription</h1></center>
-		<form method="POST" name="Form" action="inscription.do" onsubmit="return validateForm()">
-			<input type="text" class="regular" name="firstname" placeholder="Prénom" />
-			<input type="text" class="regular" name="lastname" placeholder="Nom" />
-			<input type="email" name="email" placeholder="JohnDoe@example.com" />
-			<input type="password" class="regular" name="password" placeholder="Mot de passe" />
-			<input type="password" class="regular" name="validPassword" placeholder="Validation" />
-			<span><input type="checkbox" name="newsletter" value=true> S'inscrire à la newsletter</span>
-			<input type="Submit" value="Envoyer">
+		<form method="POST" id="Form" name="Form" action="inscription.do">
+			<input type="text" class="regular" id="firstname" name="firstname" placeholder="Prénom" />
+			<input type="text" class="regular" id="lastname" name="lastname" placeholder="Nom" />
+			<input type="email" id="email" name="email" placeholder="JohnDoe@example.com" />
+			<input type="password" class="regular" id="password" name="password" placeholder="Mot de passe" />
+			<input type="password" class="regular" id="validPassword" name="validPassword" placeholder="Validation" />
+			<span><input type="checkbox" id="newsletter" name="newsletter" value=true> S'inscrire à la newsletter</span>
+			<input type="button" id="send" value="Envoyer" onclick="sendFormRegister()">
 		</form>
 	</div>
 </center>

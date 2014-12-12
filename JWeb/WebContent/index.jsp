@@ -6,7 +6,11 @@
 	<link href='http://fonts.googleapis.com/css?family=Marck+Script' rel='stylesheet' type='text/css'>
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/inscription.css" />
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/inscription.js"></script>
+	
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js"></script>
 	<title>Luncher - Catalogue</title>
 </head>
 <body>

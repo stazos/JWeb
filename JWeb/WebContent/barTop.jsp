@@ -1,7 +1,8 @@
 <div class="bar-top">
 	<h1 class="title">Luncher - Catalogue</h1>
 	<%
-    if (true)
+	int i = 1;
+    if (i != 1)
     {
         %>
         <div class="login">

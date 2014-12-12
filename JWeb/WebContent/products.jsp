@@ -4,7 +4,7 @@
 		<input type="text" name="name" placeholder="Nom du produit" /><br>
 		<textarea name="description"></textarea><br>
 		Select a file: <input type="file" name="img"><br>
-		<input type="number" name="price" placeholder="Prix" />
+		<input type="number" name="price" placeholder="Prix" /><br>
 		<input type="Submit" value="Envoyer">
 	</form>
 </div>
