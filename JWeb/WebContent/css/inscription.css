@@ -1,0 +1,28 @@
+.container-inscription
+{
+	width: 320px;
+	margin: 10px;
+	padding: 5px;
+	background-color: #ededed;
+	border-left: 1px solid #712124;
+	border-right: 1px solid #712124;
+	border-bottom: 1px solid #712124;
+	border-radius: 0px 0px 10px 10px;
+	margin-top: -1px;
+	z-index: 1;
+}
+
+
+form>input {
+	width: 304px;
+	height: 25px;
+	margin: 5px;
+}
+
+form>input.regular {
+	width: 138px;
+}
+
+form>input.small {
+	width: 83px;
+}
