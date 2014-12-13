@@ -23,9 +23,10 @@
 		}
 		Synchronize.synDB();
 	%>
-	<%@ include file="barTop.jsp" %>
-	<%@ include file="inscription.jsp" %>
+	<%@ include file="pages/barTop.jsp" %>
+	<%@ include file="pages/inscription.jsp" %>
 	
-	<a href="admin.jsp">Admin</a>
+	<a href="admin/admin.jsp">Admin</a>
+	<a href="pages/welcome.jsp">Welcome</a>
 </body>
 </html>

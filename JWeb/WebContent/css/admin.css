@@ -1,25 +1,41 @@
-.admin-module {
+.boite {
+	float: left;
+	width: 45%;
+	margin : 20px;
+	padding : 1em;	
 	background-color: #ededed;
 	border: 1px solid #712124;
 	border-radius: 10px;
-	padding: 1%;
-	margin: 1%;
-	float: left;
+}
+
+.users
+{
+	height: 250px;
+	overflow: scroll;
+}
+
+.catalogue
+{
+	width:auto;
+	float: right;
+	height: 500px;
+	overflow: scroll;
+}
+
+.boite > table
+{
+	border: 1px solid black;
+	border: medium solid #000000;
+	text-align: center;
+	font-family: arial;
 }
 
 textarea {
 	width: 100%;
 }
 
-table {
-	border: medium solid #000000;
-	text-align: center;
-	font-family: arial;
-}
-
 td, th {
-	border: thin solid #6495ed;
-	
+	border: thin solid #6495ed;	
 }
 
 td > a

@@ -1,4 +1,4 @@
-<div class="admin-module">
+<div class="boite">
 	<center><h1>Ecrire une nouvelle</h1></center>
 	<form method="POST" name="Form" action="inscription.do">
 		<input type="text" id="title" name="title" placeholder="Titre de la nouvelle" /><br>

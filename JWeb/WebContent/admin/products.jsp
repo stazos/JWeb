@@ -1,4 +1,4 @@
-<div id="module" class="admin-module">
+<div class="boite">
 	<center><h1>Ajouter un produit</h1></center>
 	<form method="POST" name="Form" action="inscription.do" onsubmit="return validateForm()">
 		<input type="text" name="name" placeholder="Nom du produit" /><br>

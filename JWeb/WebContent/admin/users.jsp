@@ -1,15 +1,14 @@
-<%@page import="java.util.Date"%>
-<%@page import="javax.swing.text.DateFormatter"%>
-<div id="module" class="admin-module">
+<div class="boite users">
+	<center><h1>Listes des Utilisateurs</h1></center>
 	<%
 		String title = null;
 		String body = null;
 		String author = null;
 	%>
-	<table style="border: 1px solid black; cellpadding: '0'; cellspacing: '0'; overflow: scroll;">
+	<table>
 		<thead>
 			<tr>
-				<td><center>id</center></td>
+				<td>id</td>
 				<td><center>Statut</center></td>
 				<td><center>Prénom</center></td>
 				<td><center>Nom</center></td>

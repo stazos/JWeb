@@ -1,6 +1,6 @@
 body {
 	font-family: 'Marck Script', cursive;
-	background: url('../img/bg3.jpg') no-repeat fixed center center/cover
+	background: url('../img/background.jpg') no-repeat fixed center center/cover
 		transparent;
 	margin: 0 auto;
 }
@@ -31,7 +31,8 @@ h1 {
 
 .defileParent
 {
-	width: 50%;
+	width: 100%;
+	background-color: white;
 }
 
 .defile {
