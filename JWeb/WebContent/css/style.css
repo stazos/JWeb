@@ -33,9 +33,10 @@ h1 {
 {
 	width: 100%;
 	background-color: white;
+	margin-bottom: 10px;
 }
 
 .defile {
-	font-family: arial;
 	text-shadow: 0px 0px 4px #455a64;
+	border: 5px solid #712124;
 }

@@ -1,9 +1,5 @@
-.page-body
-{
+.page-body {
 	width: 50%;
-	height: 800px;
-	margin: 10px;
-	padding: 5px;
 	background-color: #ededed;
 	border-left: 1px solid #712124;
 	border-right: 1px solid #712124;
@@ -11,4 +7,68 @@
 	border-radius: 0px 0px 10px 10px;
 	margin-top: -1px;
 	z-index: 1;
+}
+
+.page-header {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.page-container {
+	width: 100%;
+}
+
+.page-footer {
+	width: 100%;
+	text-decoration: none;
+	margin: 10px;
+	font-size: 50px;
+}
+
+.table {
+	width: 100%;
+}
+
+.li {
+	display: inline-block;
+	width: 199px;
+	border: 1px solid #DDDCD8;
+	margin: 10px;
+}
+
+.top {
+	width: 199px;
+	height: 75px;
+}
+
+.circle {
+	width: 60px;
+	height: 60px;
+	border-radius: 60px;
+	font-size: 20px;
+	color: #fff;
+	line-height: 60px;
+	background: #989A8F;
+}
+
+.bottom {
+	margin-top: 50px;
+}
+
+p {
+	font-size: 13px;
+	font-family: 'Droid Serif', sans-serif;
+	padding: 5px;
+}
+
+span {
+	font-weight: bold;
+}
+
+.white {
+	color: #FFFFFF;
+}
+
+.pink, .purple {
+	background-color: #BC9B94;
 }
