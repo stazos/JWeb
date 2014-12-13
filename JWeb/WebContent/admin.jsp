@@ -26,9 +26,10 @@
 
 	<%@ include file="barTop.jsp" %>
 
+	<%@ include file="users.jsp" %>
 	<%@ include file="news.jsp" %>
 	<%@ include file="products.jsp" %>
-	<%@ include file="users.jsp" %>
+
 
 </body>
 </html>

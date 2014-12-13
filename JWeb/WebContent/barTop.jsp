@@ -20,7 +20,7 @@
         <form class="login" method="POST" action="connexion.do">
 			<input type="email" class="regular" name="login" placeholder="Email" />
 			<input type="password" class="regular" name="password" placeholder="Mot de passe" />
-			<input type="Submit" value="Connexion" class="small">
+			<input type="Submit" value="Connexion" class="regular">
 		</form>
         <%
     }
