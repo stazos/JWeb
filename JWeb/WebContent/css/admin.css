@@ -5,15 +5,10 @@
 	border-radius: 10px;
 	padding: 1%;
 	margin: 1%;
-	float: left;
+	display: inline-block;
 }
 
 textarea
 {
 	width: 100%;
-}
-
-h1
-{
-	margin-bottom: 10px;
 }

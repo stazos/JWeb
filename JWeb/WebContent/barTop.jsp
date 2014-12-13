@@ -1,5 +1,8 @@
 <div class="bar-top">
-	<h1 class="title">Luncher - Catalogue</h1>
+	<h1>Luncher - Catalogue</h1>
+	<marquee class="defileParent" onmouseover="this.stop()" onmouseout="this.start()" direction="left" scrollamount="10">
+		<span class="defile">TEXTE DÉFILANT</span>
+	</marquee>
 	<%
 	int i = 1;
     if (i != 1)
