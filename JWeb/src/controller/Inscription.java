@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,11 +36,19 @@ public class Inscription extends HttpServlet {
 				session.setAttribute("admin", false);
 				if (User.userIsAdmin(id) == true) {
 					session.setAttribute("admin", true);
-					RequestDispatcher view = request.getRequestDispatcher("admin/admin.jsp");
-					view.forward(request, response);
+					response.setStatus(200);
+					PrintWriter out = response.getWriter();
+					out.print("admin/admin.jsp");
+					// RequestDispatcher view =
+					// request.getRequestDispatcher("admin/admin.jsp");
+					// view.forward(request, response);
 				}
-				RequestDispatcher view = request.getRequestDispatcher("pages/welcome.jsp");
-				view.forward(request, response);
+				response.setStatus(200);
+				PrintWriter out = response.getWriter();
+				out.print("pages/welcome.jsp");
+				// RequestDispatcher view =
+				// request.getRequestDispatcher("pages/welcome.jsp");
+				// view.forward(request, response);
 			} else {
 				response.setStatus(403);
 				PrintWriter out = response.getWriter();
