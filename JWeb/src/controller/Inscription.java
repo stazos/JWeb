@@ -24,6 +24,9 @@ public class Inscription extends HttpServlet {
 		String password = request.getParameter("password");
 		String newsletter = request.getParameter("newsletter");
 
+		System.out.println(newsletter);
+		if (newsletter == null)
+			newsletter = "false";
 		// Now use our Coffee Model above
 		if (User.checkUserMail(email) == true) {
 			User.createUser(firstname, lastname, email, password, newsletter);
