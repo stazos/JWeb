@@ -29,13 +29,14 @@ public class DbUtility {
 							+ "PRIMARY KEY (id), KEY id (id), "
 							+ "UNIQUE id_2 (id) );");
 			System.out.println("statut -> " + status);
-			// produit : id, nom , photo, description, prix
+			// product : id, nom , photo, description, prix
 			status = statement
 					.executeUpdate("CREATE TABLE IF NOT EXISTS product ("
 							+ "id int(11) NOT NULL auto_increment, "
 							+ "name varchar(255) NOT NULL, "
 							+ "photo varchar(255) NOT NULL, "
-							+ "prix float NOT NULL, "
+							+ "description varchar(255) NOT NULL, "
+							+ "price float NOT NULL, "
 							+ "PRIMARY KEY (id), KEY id (id), "
 							+ "UNIQUE id_2 (id) );");
 			System.out.println("statut -> " + status);

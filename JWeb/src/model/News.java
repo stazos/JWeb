@@ -22,45 +22,6 @@ public class News {
 		this.date = date;
 	}
 
-	static public void createNews(String title, String description) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		try {
-			String req = "INSERT INTO news VALUES (null, '" + title + "', '"
-					+ description + "', NOW());";
-			System.out.println(req);
-			int statut = statement.executeUpdate(req);
-			System.out.println("statut -> " + statut);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
-	}
-
-	static public List<News> getNews() {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		List<News> listNews = new ArrayList<News>();
-		try {
-			String req = "SELECT title, description, date FROM news;";
-			System.out.println(req);
-			ResultSet resultat = statement.executeQuery(req);
-			System.out.println(resultat);
-			while (resultat.next()) {
-				String title = resultat.getString("title");
-				String description = resultat.getString("description");
-				Date date = resultat.getDate("date");
-				listNews.add(new News(title, description, date));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
-		return listNews;
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -71,5 +32,50 @@ public class News {
 
 	public Date getDate() {
 		return date;
+	}
+
+	static public void createNews(String title, String description) {
+		Connection connexion = DbUtility.connectToDB();
+		Statement statement = DbUtility.getConnectStatement(connexion);
+		try {
+			String req = "INSERT INTO news VALUES (null, '" + title + "', '" + description + "', NOW());";
+			System.out.println(req);
+			int statut = statement.executeUpdate(req);
+			System.out.println("statut -> " + statut);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtility.closeConnexion(connexion, statement);
+		}
+	}
+
+	static public String getNews() {
+		Connection connexion = DbUtility.connectToDB();
+		Statement statement = DbUtility.getConnectStatement(connexion);
+		String jsonObject = "[";
+		try {
+			String req = "SELECT title, description, date FROM news;";
+			System.out.println(req);
+			ResultSet resultat = statement.executeQuery(req);
+			System.out.println(resultat);
+			while (resultat.next()) {
+				System.out.println("debug");
+				if (resultat.isFirst() == false)
+					jsonObject += ", ";
+				jsonObject += "{ ";
+				jsonObject += "\"title\": \"" + resultat.getString("title") + "\", ";
+				jsonObject += "\"description\": \"" + resultat.getString("description") + "\", ";
+				jsonObject += "\"date\": \"" + resultat.getDate("date") + "\"";
+				jsonObject += " }";
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtility.closeConnexion(connexion, statement);
+		}
+		jsonObject += "]";
+		System.out.println(jsonObject);
+		System.out.println("debug2");
+		return jsonObject;
 	}
 }

@@ -14,6 +14,9 @@
 </head>
 <body>
 	<%@ include file="barTop.jsp"%>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="../js/news.js"></script>
 
 
 	<center>
@@ -21,11 +24,8 @@
 			<div class="page-header">
 				<h1>Catalogue 2015</h1>
 			</div>
-			<marquee class="defileParent" onmouseover="this.stop()"
+			<marquee id="newsContainer" class="defileParent" onmouseover="this.stop()"
 				onmouseout="this.start()" direction="left" scrollamount="5">
-				<span class="defile">Nouveau Produit : Un magnifique god au
-					couleur arc-en-ciel est disponible dans notre Catalogue ! Venez
-					vite l'achetez !</span>
 			</marquee>
 
 			<div class="page-container">

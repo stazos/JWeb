@@ -31,4 +31,13 @@
 		<url-pattern>/connexion.do</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>News</servlet-name>
+		<servlet-class>controller.NewsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>News</servlet-name>
+		<url-pattern>/news.do</url-pattern>
+	</servlet-mapping>
+
 </web-app>
