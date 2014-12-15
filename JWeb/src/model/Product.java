@@ -9,18 +9,6 @@ import utility.DbUtility;
 
 public class Product {
 
-	private String name;
-	private String photo;
-	private String description;
-	private Float price;
-
-	public Product(String name, String photo, String description, Float price) {
-		this.name = name;
-		this.photo = photo;
-		this.description = description;
-		this.price = price;
-	}
-
 	static public void createProduct(String name, String photo, String description, Float price) {
 		Connection connexion = DbUtility.connectToDB();
 		Statement statement = DbUtility.getConnectStatement(connexion);
@@ -37,12 +25,12 @@ public class Product {
 		}
 	}
 
-	static public String getProduct() {
+	static public String getAllProduct() {
 		Connection connexion = DbUtility.connectToDB();
 		Statement statement = DbUtility.getConnectStatement(connexion);
 		String jsonObject = "[";
 		try {
-			String req = "SELECT name, photo, description, price FROM news;";
+			String req = "SELECT id, name, photo, description, price FROM product;";
 			System.out.println(req);
 			ResultSet resultat = statement.executeQuery(req);
 			System.out.println(resultat);
@@ -50,6 +38,7 @@ public class Product {
 				if (resultat.isFirst() == false)
 					jsonObject += ", ";
 				jsonObject += "{ ";
+				jsonObject += "id: '" + resultat.getInt("id") + "', ";
 				jsonObject += "name: '" + resultat.getString("name") + "', ";
 				jsonObject += "photo: '" + resultat.getString("photo") + "', ";
 				jsonObject += "description: '" + resultat.getString("description") + "', ";
@@ -62,6 +51,32 @@ public class Product {
 			DbUtility.closeConnexion(connexion, statement);
 		}
 		jsonObject += "]";
+		return jsonObject;
+	}
+
+	static public String getProduct(int id) {
+		Connection connexion = DbUtility.connectToDB();
+		Statement statement = DbUtility.getConnectStatement(connexion);
+		String jsonObject = "";
+		try {
+			String req = "SELECT name, photo, description, price FROM product WHERE id = " + id + ";";
+			System.out.println(req);
+			ResultSet resultat = statement.executeQuery(req);
+			System.out.println(resultat);
+			resultat.next();
+			if (resultat.isFirst() == true) {
+				jsonObject += "{ ";
+				jsonObject += "name: '" + resultat.getString("name") + "', ";
+				jsonObject += "photo: '" + resultat.getString("photo") + "', ";
+				jsonObject += "description: '" + resultat.getString("description") + "', ";
+				jsonObject += "price: " + resultat.getString("price") + ", ";
+				jsonObject += " }";
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtility.closeConnexion(connexion, statement);
+		}
 		return jsonObject;
 	}
 

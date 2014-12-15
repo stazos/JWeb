@@ -1,38 +1,13 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import utility.DbUtility;
 
 public class News {
-
-	private String title;
-	private String description;
-	private Date date;
-
-	public News(String title, String description, Date date) {
-		this.title = title;
-		this.description = description;
-		this.date = date;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public Date getDate() {
-		return date;
-	}
 
 	static public void createNews(String title, String description) {
 		Connection connexion = DbUtility.connectToDB();
@@ -59,7 +34,6 @@ public class News {
 			ResultSet resultat = statement.executeQuery(req);
 			System.out.println(resultat);
 			while (resultat.next()) {
-				System.out.println("debug");
 				if (resultat.isFirst() == false)
 					jsonObject += ", ";
 				jsonObject += "{ ";
@@ -75,7 +49,6 @@ public class News {
 		}
 		jsonObject += "]";
 		System.out.println(jsonObject);
-		System.out.println("debug2");
 		return jsonObject;
 	}
 }

@@ -94,4 +94,67 @@ public class User {
 		return result;
 	}
 
+	static public String getUser() {
+		Connection connexion = DbUtility.connectToDB();
+		Statement statement = DbUtility.getConnectStatement(connexion);
+		String jsonObject = "[";
+		try {
+			String req = "SELECT id, firstname, lastname, email, newsletter, admin, date_inscription FROM user";
+			System.out.println(req);
+			ResultSet resultat = statement.executeQuery(req);
+			System.out.println(resultat);
+			while (resultat.next()) {
+				if (resultat.isFirst() == false)
+					jsonObject += ", ";
+				jsonObject += "{ ";
+				jsonObject += "\"id\": \"" + resultat.getInt("id") + "\", ";
+				jsonObject += "\"firstname\": \"" + resultat.getString("firstname") + "\", ";
+				jsonObject += "\"lastname\": \"" + resultat.getString("lastname") + "\", ";
+				jsonObject += "\"email\": \"" + resultat.getString("email") + "\"";
+				jsonObject += "\"newsletter\": \"" + resultat.getBoolean("newsletter") + "\"";
+				jsonObject += "\"admin\": \"" + resultat.getBoolean("admin") + "\"";
+				jsonObject += "\"date_inscription\": \"" + resultat.getDate("date_inscription") + "\"";
+				jsonObject += " }";
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtility.closeConnexion(connexion, statement);
+		}
+		jsonObject += "]";
+		System.out.println(jsonObject);
+		return jsonObject;
+	}
+
+	static public void userSetAdmin(int id) {
+		Connection connexion = DbUtility.connectToDB();
+		Statement statement = DbUtility.getConnectStatement(connexion);
+		try {
+			String req = "UPDATE user SET admin = true WHERE id = " + id + ";";
+			System.out.println(req);
+			int statut = statement.executeUpdate(req);
+			System.out.println("statut -> " + statut);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtility.closeConnexion(connexion, statement);
+		}
+	}
+
+	static public void userSetNewsletter(int id) {
+		Connection connexion = DbUtility.connectToDB();
+		Statement statement = DbUtility.getConnectStatement(connexion);
+		try {
+			String req = "UPDATE user SET newsletter = true WHERE id = " + id + ";";
+			System.out.println(req);
+			int statut = statement.executeUpdate(req);
+			System.out.println("statut -> " + statut);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtility.closeConnexion(connexion, statement);
+		}
+	}
+
+	
 }
