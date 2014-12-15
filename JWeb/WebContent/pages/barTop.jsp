@@ -14,9 +14,9 @@
     else
     {
         %>
-        <form class="login" method="POST" action="connexion.do">
-			<input type="email" class="regular" name="login" placeholder="Email" />
-			<input type="password" class="regular" name="password" placeholder="Mot de passe" />
+        <form id="connect" name="connect" class="login" method="POST" action="connexion.do">
+			<input type="email" class="regular" id="login" name="login" placeholder="Email" />
+			<input type="password" class="regular" id="mdp" name="mdp" placeholder="Mot de passe" />
 			<input type="Submit" value="Connexion" class="regular">
 		</form>
         <%

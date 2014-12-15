@@ -3,6 +3,6 @@
 	<form method="POST" name="Form1" action="../news.do">
 		<input type="text" id="title" name="title" placeholder="Titre de la nouvelle" /><br>
 		<textarea id="description" name="description"></textarea><br>
-		<input type="button" onclick="sendNews()" value="Envoyer">
+		<input type="submit" value="Envoyer">
 	</form>
 </div>

@@ -49,13 +49,18 @@ $(document)
 																.attr('method'),
 														data : $this
 																.serialize(),
-														success : function() {
+														success : function(data) {
 															document.forms["Form"]["firstname"].value = "";
 															document.forms["Form"]["lastname"].value = "";
 															document.forms["Form"]["email"].value = "";
 															document.forms["Form"]["password"].value = "";
 															document.forms["Form"]["validPassword"].value = "";
 															alert("Inscription Reussi. Vous pouvez vous connecter.");
+													        if (data) {
+													            // data.redirect contains the string URL to redirect to
+													            window.location.href = data;
+													        }
+
 														},
 														error : function(xhr,
 																ajaxOptions,
@@ -66,4 +71,38 @@ $(document)
 													});
 										}
 									});
+					$('#connect').on('submit', function(e)
+							{
+								e.preventDefault();
+
+								var $this = $(this);
+								var login = $('#login').val();
+								var mdp = $('#mdp').val();
+								
+								console.log(login + password);
+								
+								if (login == null || login == "" || password == null || password == "")
+									return false;						
+								else
+								{
+									$.ajax({
+										url : $this.attr('action'),
+										type : $this.attr('method'),
+										data : $this.serialize(),
+										success : function(data)
+										{
+									        if (data)
+									        {
+									            // data.redirect contains the string URL to redirect to
+									            window.location.href = data;
+									        }
+										},
+										error : function(xhr, ajaxOptions, thrownError)
+										{
+											alert(xhr.status);
+											alert(thrownError);
+										}
+								});
+							}
+						});
 				});

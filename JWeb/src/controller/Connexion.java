@@ -18,7 +18,7 @@ public class Connexion extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		String email = request.getParameter("login");
-		String password = request.getParameter("password");
+		String password = request.getParameter("mdp");
 
 		int id = User.connectUser(email, password);
 		if (id != -1) {
