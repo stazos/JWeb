@@ -2,31 +2,28 @@
  * 
  */
 
-function init()
-{
+function init() {
 	document.body.style.width = screen.width + "px";
 }
 
 function sendNews() {
-	var $this = $(this);
 
-	var title = $('#title').val();
-	var description = $('#description').val();
-	alert(title);
-	if (title == null || title == "" || description == null || description == "")
+	var obj = new Object();
+	obj.title = $('#title').val();
+	obj.description = $('#description').val();
+
+	if (obj.title == null || obj.title == "" || obj.description == null
+			|| obj.description == "")
 		return false;
 	else {
-		$.ajax({
-			url : $this.attr('action'),
-			type : $this.attr('method'),
-			data : $this.serialize(),
-			success : function() {
-				alert("News Envoyé !");
-			},
-			error : function(xhr, ajaxOptions, thrownError) {
-				alert(xhr.status);
-				alert(thrownError);
-			}
+		$.post('../news.do', {
+			title : obj.title,
+			description : obj.description
+		}, function(data) {
+			console.log("data", data);
+		})
+		.fail(function(error) {
+			console.log("error", error);
 		});
 		return false;
 	}

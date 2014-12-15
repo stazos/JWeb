@@ -16,13 +16,15 @@ public class NewsController extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
+
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
-
+		
 		News.createNews(title, description);
 		response.setStatus(200);
 		PrintWriter out = response.getWriter();
 		out.print("SUCCESS");
+		out.flush();
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
