@@ -30,14 +30,18 @@ public class Connexion extends HttpServlet {
 				response.setStatus(200);
 				PrintWriter out = response.getWriter();
 				out.print("admin/admin.jsp");
+				out.flush();
+			} else {
+				response.setStatus(200);
+				PrintWriter out = response.getWriter();
+				out.print("pages/welcome.jsp");
+				out.flush();
 			}
-			response.setStatus(200);
-			PrintWriter out = response.getWriter();
-			out.print("pages/welcome.jsp");
 		} else {
 			response.setStatus(403);
 			PrintWriter out = response.getWriter();
 			out.print("FAIL");
+			out.flush();
 		}
 	}
 }

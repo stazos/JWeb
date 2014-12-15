@@ -39,13 +39,16 @@ public class Inscription extends HttpServlet {
 					response.setStatus(200);
 					PrintWriter out = response.getWriter();
 					out.print("admin/admin.jsp");
+					out.flush();
 					// RequestDispatcher view =
 					// request.getRequestDispatcher("admin/admin.jsp");
 					// view.forward(request, response);
+				} else {
+					response.setStatus(200);
+					PrintWriter out = response.getWriter();
+					out.print("pages/welcome.jsp");
+					out.flush();
 				}
-				response.setStatus(200);
-				PrintWriter out = response.getWriter();
-				out.print("pages/welcome.jsp");
 				// RequestDispatcher view =
 				// request.getRequestDispatcher("pages/welcome.jsp");
 				// view.forward(request, response);
@@ -53,11 +56,13 @@ public class Inscription extends HttpServlet {
 				response.setStatus(403);
 				PrintWriter out = response.getWriter();
 				out.print("FAIL");
+				out.flush();
 			}
 		} else {
 			response.setStatus(403);
 			PrintWriter out = response.getWriter();
 			out.print("FAIL");
+			out.flush();
 		}
 		// Use the below code to debug the program if you get problems
 		// response.setContentType("text/html"):
