@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="controller.Synchronize" %>
+<%@ page import="utility.DbUtility" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,11 +17,11 @@
 <body>
 	<%
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			System.out.println(e.getMessage());
-		}
-		Synchronize.synDB();
+		Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+		System.out.println(e.getMessage());
+			}
+		DbUtility.synDB();
 	%>
 	<%@ include file="pages/barTop.jsp" %>
 	<%@ include file="pages/inscription.jsp" %>
