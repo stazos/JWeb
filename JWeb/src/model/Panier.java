@@ -57,7 +57,7 @@ public class Panier {
 		Connection connexion = DbUtility.connectToDB();
 		Statement statement = DbUtility.getConnectStatement(connexion);
 		try {
-			String req = "DELETE panier WHERE idUser = " + idUser + " AND idProduct = " + idProduct + ";";
+			String req = "DELETE FROM panier WHERE idUser = " + idUser + " AND idProduct = " + idProduct + ";";
 			System.out.println(req);
 			int statut = statement.executeUpdate(req);
 			System.out.println("statut -> " + statut);
@@ -72,7 +72,7 @@ public class Panier {
 		Connection connexion = DbUtility.connectToDB();
 		Statement statement = DbUtility.getConnectStatement(connexion);
 		try {
-			String req = "DELETE panier WHERE idUser = " + idUser + ";";
+			String req = "DELETE FROM panier WHERE idUser = " + idUser + ";";
 			System.out.println(req);
 			int statut = statement.executeUpdate(req);
 			System.out.println("statut -> " + statut);

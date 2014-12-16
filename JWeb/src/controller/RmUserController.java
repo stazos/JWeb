@@ -10,19 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.User;
 
-public class UserController extends HttpServlet {
+public class RmUserController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		
-		String jsonObject = User.getUser();
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-		response.setContentType("application/json");
+		String idString = request.getParameter("id");
+		int id = Integer.valueOf(idString);
+
+		User.userDelete(id);
+
 		response.setStatus(200);
 		PrintWriter out = response.getWriter();
-		out.print(jsonObject);
+		out.print("SUCCESS");
 		out.flush();
 	}
-
 }

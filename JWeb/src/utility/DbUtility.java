@@ -40,7 +40,7 @@ public class DbUtility {
 							+ "PRIMARY KEY (id), KEY id (id), "
 							+ "UNIQUE id_2 (id) );");
 			System.out.println("statut -> " + status);
-			// avis: id, idProduit, idUser, avis
+			// reviews: id, idProduit, idUser, avis
 			status = statement
 					.executeUpdate("CREATE TABLE IF NOT EXISTS reviews ("
 							+ "id int(11) NOT NULL auto_increment, "

@@ -156,5 +156,19 @@ public class User {
 		}
 	}
 
-	
+	static public void userDelete(int id) {
+		Connection connexion = DbUtility.connectToDB();
+		Statement statement = DbUtility.getConnectStatement(connexion);
+		try {
+			String req = "DELETE FROM user WHERE id = " + id + ";";
+			System.out.println(req);
+			int statut = statement.executeUpdate(req);
+			System.out.println("statut -> " + statut);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtility.closeConnexion(connexion, statement);
+		}
+	}
+
 }
