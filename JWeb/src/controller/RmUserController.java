@@ -14,6 +14,11 @@ public class RmUserController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * POST.
+	 * Attend en params un "id" d'un User
+	 * supprime l'utilisateur.
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		String idString = request.getParameter("id");

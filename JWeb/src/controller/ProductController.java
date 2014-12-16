@@ -14,6 +14,11 @@ public class ProductController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * POST.
+	 * Attend en params un "name", une "photo", une "description", un float "price".
+	 * créer un produit.
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		String name = request.getParameter("name");
@@ -31,6 +36,11 @@ public class ProductController extends HttpServlet {
 		out.flush();
 	}
 
+	/**
+	 * GET.
+	 * Attend en params un "id" d'un produit
+	 * retourne les informations de ce produit.
+	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		String idString = request.getParameter("id");

@@ -15,6 +15,11 @@ public class ReviewsController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * POST.
+	 * Attend en params un "idProduct" et une "review"
+	 * Créer une review lier a l'utilisateur connecter et au produit.
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		String idString = request.getParameter("idProduct");
@@ -33,6 +38,11 @@ public class ReviewsController extends HttpServlet {
 		out.flush();
 	}
 
+	/**
+	 * GET.
+	 * Attend en params un "id" d'un produit.
+	 * retourne les reviews lier a ce produit.
+	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		String idString = request.getParameter("id");

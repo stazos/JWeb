@@ -15,6 +15,11 @@ public class Inscription extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * POST.
+	 * Attend en params un "firstname", un "lastname", un "email", un "password" et un boolean "newsletter.
+	 * inscrit et connecte l'utilisateur et renvoie le chemin de la page sur laquel il doit etre redirigé.
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		String firstname = request.getParameter("firstname");

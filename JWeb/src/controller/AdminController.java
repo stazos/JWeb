@@ -14,6 +14,11 @@ public class AdminController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * POST.
+	 * Attend en params un "id" d'utilisateur.
+	 * Donne à cette utilisateur les droits administrateur.
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		String idString = request.getParameter("id");

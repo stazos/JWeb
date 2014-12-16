@@ -15,6 +15,11 @@ public class Connexion extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * POST.
+	 * Attend en params un "login" et un "mdp".
+	 * Connect l'utilisateur et retourne le chemin page sur laquel il doit etre redirigé.
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		String email = request.getParameter("login");

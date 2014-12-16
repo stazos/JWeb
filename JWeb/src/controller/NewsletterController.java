@@ -14,6 +14,11 @@ public class NewsletterController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * POST.
+	 * Attend en params un "id" d'utilisateur.
+	 * met a jour l'utilisateur pour qu'il reçoive la newsletter.
+	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
 		String idString = request.getParameter("id");
