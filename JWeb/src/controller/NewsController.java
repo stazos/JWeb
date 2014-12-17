@@ -24,6 +24,7 @@ public class NewsController extends HttpServlet {
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
 		
+		
 		News.createNews(title, description);
 		response.setStatus(200);
 		PrintWriter out = response.getWriter();

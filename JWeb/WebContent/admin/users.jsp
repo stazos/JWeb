@@ -1,10 +1,5 @@
 <div class="boite users">
 	<center><h1>Listes des Utilisateurs</h1></center>
-	<%
-		String title = null;
-		String body = null;
-		String author = null;
-	%>
 	<table>
 		<thead>
 			<tr>
@@ -19,24 +14,8 @@
 			</tr>
 
 		</thead>
-		<tbody>
-		<%
-		for (i = 0; i != 10; i++)
-			{
-			%>
-			<tr>
-				<td><%=(title != null) ? title : "titre non spécifié"%></td>
-				<td><%=(body != null) ? body : "corps non spécifié"%></td>
-				<td><%=(body != null) ? body : "corps non spécifié"%></td>
-				<td><%=(body != null) ? body : "corps non spécifié"%></td>
-				<td><%=(body != null) ? body : "corps non spécifié"%></td>
-				<td><input type="checkbox" /></td>
-				<td><a href="#">PasserAdmin</a></td>
-				<td><a href="#">Oui</a></td>
-			</tr>
-			<%
-			}
-		%>
+		<tbody id="listUsers">
+	
 		</tbody>
 	</table>
 </div>

@@ -18,8 +18,7 @@ $(document)
 										var lastname = $('#lastname').val();
 										var email = $('#email').val();
 										var password = $('#password').val();
-										var validPassword = $('#validPassword')
-												.val();
+										var validPassword = $('#validPassword').val();
 
 										if (firstname == null
 												|| firstname == ""
@@ -43,12 +42,9 @@ $(document)
 										} else {
 											$
 													.ajax({
-														url : $this
-																.attr('action'),
-														type : $this
-																.attr('method'),
-														data : $this
-																.serialize(),
+														url : 'inscription.do',
+														type : 'POST',
+														data : $this.serialize(),
 														success : function(data) {
 															document.forms["Form"]["firstname"].value = "";
 															document.forms["Form"]["lastname"].value = "";

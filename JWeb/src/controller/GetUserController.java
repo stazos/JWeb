@@ -22,7 +22,6 @@ public class GetUserController extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
 		String jsonObject = User.getUser();
-
 		response.setContentType("application/json");
 		response.setStatus(200);
 		PrintWriter out = response.getWriter();

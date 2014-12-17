@@ -21,14 +21,14 @@ public class ProductController extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-		String name = request.getParameter("name");
-		String photo = request.getParameter("photo");
-		String description = request.getParameter("description");
-		String priceString = request.getParameter("price");
-		
+		String name = request.getParameter("titleProduct");
+		String photo = request.getParameter("fileProduct");
+		String description = request.getParameter("descriptionProduct");
+		String priceString = request.getParameter("priceProduct");
+		System.out.println("name :" + name);
 		Float price = Float.valueOf(priceString);
 		
-		Product.createProduct(name, photo, description, price);
+		Product.createProduct(name, null, description, price);
 
 		response.setStatus(200);
 		PrintWriter out = response.getWriter();

@@ -18,7 +18,7 @@
 	src="${pageContext.request.contextPath}/js/admin.js"></script>
 <title>Insert title here</title>
 </head>
-<body onload="init()">
+<body id="init">
 
 	<%@ include file="../pages/barTop.jsp"%>
 

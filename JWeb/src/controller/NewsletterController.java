@@ -19,9 +19,10 @@ public class NewsletterController extends HttpServlet {
 	 * Attend en params un "id" d'utilisateur.
 	 * met a jour l'utilisateur pour qu'il reçoive la newsletter.
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
 		String idString = request.getParameter("id");
+		System.out.println("fail " + idString);
 		int id = Integer.valueOf(idString);
 
 		User.userSetNewsletter(id);

@@ -1,8 +1,8 @@
 <div class="bar-top">
 	<h1>Luncher - Catalogue</h1>
 	<%
-	int i = 1;
-    if (i != 1)
+		Integer i = (Integer)session.getAttribute("idUser");
+    if (i != null)
     {
         %>
         <div class="login">

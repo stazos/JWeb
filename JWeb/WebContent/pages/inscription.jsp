@@ -1,7 +1,7 @@
 <center>
 	<div class="container-inscription">
 		<center><h1>Inscription</h1></center>
-		<form method="POST" id="Form" name="Form" action="inscription.do">
+		<form id="Form" name="Form">
 			<input type="text" class="regular" id="firstname" name="firstname" placeholder="Prénom" />
 			<input type="text" class="regular" id="lastname" name="lastname" placeholder="Nom" />
 			<input type="email" id="email" name="email" placeholder="JohnDoe@example.com" />

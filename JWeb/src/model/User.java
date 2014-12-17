@@ -110,9 +110,9 @@ public class User {
 				jsonObject += "\"id\": \"" + resultat.getInt("id") + "\", ";
 				jsonObject += "\"firstname\": \"" + resultat.getString("firstname") + "\", ";
 				jsonObject += "\"lastname\": \"" + resultat.getString("lastname") + "\", ";
-				jsonObject += "\"email\": \"" + resultat.getString("email") + "\"";
-				jsonObject += "\"newsletter\": \"" + resultat.getBoolean("newsletter") + "\"";
-				jsonObject += "\"admin\": \"" + resultat.getBoolean("admin") + "\"";
+				jsonObject += "\"email\": \"" + resultat.getString("email") + "\", ";
+				jsonObject += "\"newsletter\": \"" + resultat.getBoolean("newsletter") + "\", ";
+				jsonObject += "\"admin\": \"" + resultat.getBoolean("admin") + "\", ";
 				jsonObject += "\"date_inscription\": \"" + resultat.getDate("date_inscription") + "\"";
 				jsonObject += " }";
 			}
