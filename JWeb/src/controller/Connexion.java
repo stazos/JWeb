@@ -1,8 +1,8 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +23,7 @@ public class Connexion extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		String email = request.getParameter("login");
-		String password = request.getParameter("mdp");
+		String password = request.getParameter("password");
 
 		int id = User.connectUser(email, password);
 		if (id != -1) {
@@ -32,21 +32,16 @@ public class Connexion extends HttpServlet {
 			session.setAttribute("admin", false);
 			if (User.userIsAdmin(id) == true) {
 				session.setAttribute("admin", true);
-				response.setStatus(200);
-				PrintWriter out = response.getWriter();
-				out.print("admin/admin.jsp");
-				out.flush();
+				RequestDispatcher view = request.getRequestDispatcher("admin/admin.jsp");
+			    view.forward(request, response);
 			} else {
-				response.setStatus(200);
-				PrintWriter out = response.getWriter();
-				out.print("pages/welcome.jsp");
-				out.flush();
+				RequestDispatcher view = request.getRequestDispatcher("pages/welcome.jsp");
+			    view.forward(request, response);
 			}
 		} else {
-			response.setStatus(403);
-			PrintWriter out = response.getWriter();
-			out.print("FAIL");
-			out.flush();
+			request.setAttribute("error", "Error utilisateur non existant");
+			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+		    view.forward(request, response); 
 		}
 	}
 }
