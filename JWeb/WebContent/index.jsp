@@ -5,9 +5,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href='http://fonts.googleapis.com/css?family=Marck+Script' rel='stylesheet' type='text/css'>
-	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
-	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/inscription.css" />
-	
+	<link type="text/css" rel="stylesheet" href="css/style.css" />
+	<link type="text/css" rel="stylesheet" href="css/inscription.css" />
 	<title>Luncher - Catalogue</title>
 </head>
 <body>
@@ -17,11 +16,15 @@
 			} catch (ClassNotFoundException e) {
 		System.out.println(e.getMessage());
 			}
-		DbUtility.synDB();
+	//	DbUtility.synDB();
 	%>
+	
 	<%@ include file="pages/barTop.jsp" %>
 	<%@ include file="pages/inscription.jsp" %>
 	
+
+
+
 	<a href="admin/admin.jsp">Admin</a>
 	<a href="pages/welcome.jsp">Welcome</a>
 </body>

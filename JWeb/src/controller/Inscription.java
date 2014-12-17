@@ -28,10 +28,10 @@ public class Inscription extends HttpServlet {
 		String password = request.getParameter("password");
 		String validPassword = request.getParameter("validPassword");
 		String newsletter = request.getParameter("newsletter");
-
+				
 		if (newsletter == null)
 			newsletter = "false";
-		if (firstname == null || lastname == null || email == null || password == null || password != validPassword) {
+		if (firstname == "" || lastname == "" || email == "" || password == "" || password.equals(validPassword) == false) {
 			request.setAttribute("error", "Erreur dans le formulaire d'inscription");
 			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 		    view.forward(request, response); 

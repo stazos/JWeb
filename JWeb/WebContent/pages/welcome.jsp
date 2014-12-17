@@ -4,20 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href='http://fonts.googleapis.com/css?family=Marck+Script'
-	rel='stylesheet' type='text/css'>
-<link type="text/css" rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/style.css" />
-<link type="text/css" rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/pages.css" />
+<link href='http://fonts.googleapis.com/css?family=Marck+Script' rel='stylesheet' type='text/css'>
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/pages.css" />
 <title>Insert title here</title>
 </head>
 <body>
 	<%@ include file="barTop.jsp"%>
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script type="text/javascript" src="../js/news.js"></script>
-
 
 	<center>
 		<div class="page-body">

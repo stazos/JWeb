@@ -21,6 +21,13 @@ h1 {
 	text-align: center;
 }
 
+.error
+{
+	width: 50%;
+	background-color: red;
+	color: black;
+}
+
 .bar-top>h1 {
 	float: left;
 }
