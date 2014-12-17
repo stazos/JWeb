@@ -21,8 +21,8 @@ public class User {
 		return id;
 	}
 
-	public String getFirtname() {
-		return firtname;
+	public String getFirstname() {
+		return firstname;
 	}
 
 	public String getLastname() {
@@ -41,9 +41,9 @@ public class User {
 		return admin;
 	}
 
-	public User(Integer id, String firtname, String lastname, String email, Boolean newsletter, Boolean admin) {
+	public User(Integer id, String firstname, String lastname, String email, Boolean newsletter, Boolean admin) {
 		this.id = id;
-		this.firtname = firtname;
+		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
 		this.newsletter = newsletter;
@@ -192,6 +192,36 @@ public class User {
 		Statement statement = DbUtility.getConnectStatement(connexion);
 		try {
 			String req = "DELETE FROM user WHERE id = " + id + ";";
+			System.out.println(req);
+			int statut = statement.executeUpdate(req);
+			System.out.println("statut -> " + statut);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtility.closeConnexion(connexion, statement);
+		}
+	}
+
+	static public void userUnsetNewsletter() {
+		Connection connexion = DbUtility.connectToDB();
+		Statement statement = DbUtility.getConnectStatement(connexion);
+		try {
+			String req = "UPDATE user SET newsletter = false WHERE newsletter = true;";
+			System.out.println(req);
+			int statut = statement.executeUpdate(req);
+			System.out.println("statut -> " + statut);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtility.closeConnexion(connexion, statement);
+		}
+	}
+	
+	static public void userUnsetAdmin() {
+		Connection connexion = DbUtility.connectToDB();
+		Statement statement = DbUtility.getConnectStatement(connexion);
+		try {
+			String req = "UPDATE user SET admin = false WHERE admin = true;";
 			System.out.println(req);
 			int statut = statement.executeUpdate(req);
 			System.out.println("statut -> " + statut);

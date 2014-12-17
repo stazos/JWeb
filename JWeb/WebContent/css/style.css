@@ -28,6 +28,13 @@ h1 {
 	color: black;
 }
 
+.success
+{
+	width: 50%;
+	background-color: green;
+	color: black;
+}
+
 .bar-top>h1 {
 	float: left;
 }

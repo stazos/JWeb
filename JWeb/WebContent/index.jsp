@@ -25,7 +25,7 @@
 
 
 
-	<a href="admin/admin.jsp">Admin</a>
+	<a href="admin.jsp">Admin</a>
 	<a href="pages/welcome.jsp">Welcome</a>
 </body>
 </html>
