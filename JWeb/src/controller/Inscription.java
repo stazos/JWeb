@@ -1,8 +1,8 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +16,9 @@ public class Inscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * POST.
-	 * Attend en params un "firstname", un "lastname", un "email", un "password" et un boolean "newsletter.
-	 * inscrit et connecte l'utilisateur et renvoie le chemin de la page sur laquel il doit etre redirigé.
+	 * POST. Attend en params un "firstname", un "lastname", un "email", un
+	 * "password" et un boolean "newsletter. inscrit et connecte l'utilisateur
+	 * et renvoie le chemin de la page sur laquel il doit etre redirigé.
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
@@ -26,12 +26,17 @@ public class Inscription extends HttpServlet {
 		String lastname = request.getParameter("lastname");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		String validPassword = request.getParameter("validPassword");
 		String newsletter = request.getParameter("newsletter");
 
-		System.out.println(newsletter);
 		if (newsletter == null)
 			newsletter = "false";
-		// Now use our Coffee Model above
+		if (firstname == null || lastname == null || email == null || password == null || password != validPassword) {
+			request.setAttribute("error", "Erreur dans le formulaire d'inscription");
+			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+		    view.forward(request, response); 
+		    return;
+		}
 		if (User.checkUserMail(email) == true) {
 			User.createUser(firstname, lastname, email, password, newsletter);
 			int id = User.connectUser(email, password);
@@ -41,33 +46,24 @@ public class Inscription extends HttpServlet {
 				session.setAttribute("admin", false);
 				if (User.userIsAdmin(id) == true) {
 					session.setAttribute("admin", true);
-					response.setStatus(200);
-					PrintWriter out = response.getWriter();
-					out.print("admin/admin.jsp");
-					out.flush();
-					// RequestDispatcher view =
-					// request.getRequestDispatcher("admin/admin.jsp");
-					// view.forward(request, response);
+					RequestDispatcher view = request.getRequestDispatcher("admin/admin.jsp");
+				    view.forward(request, response); 
 				} else {
-					response.setStatus(200);
-					PrintWriter out = response.getWriter();
-					out.print("pages/welcome.jsp");
-					out.flush();
+					RequestDispatcher view = request.getRequestDispatcher("pages/welcome.jsp");
+				    view.forward(request, response); 
 				}
 				// RequestDispatcher view =
 				// request.getRequestDispatcher("pages/welcome.jsp");
 				// view.forward(request, response);
 			} else {
-				response.setStatus(403);
-				PrintWriter out = response.getWriter();
-				out.print("FAIL");
-				out.flush();
+				request.setAttribute("error", "Erreur impossible de connecter l'utilisateur");
+				RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+			    view.forward(request, response); 
 			}
 		} else {
-			response.setStatus(403);
-			PrintWriter out = response.getWriter();
-			out.print("FAIL");
-			out.flush();
+			request.setAttribute("error", "Erreur email déja existant");
+			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+		    view.forward(request, response); 
 		}
 		// Use the below code to debug the program if you get problems
 		// response.setContentType("text/html"):
