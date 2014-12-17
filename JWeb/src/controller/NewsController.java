@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,10 +27,9 @@ public class NewsController extends HttpServlet {
 		
 		
 		News.createNews(title, description);
-		response.setStatus(200);
-		PrintWriter out = response.getWriter();
-		out.print("SUCCESS");
-		out.flush();
+		request.setAttribute("success", "creation de la news reussi");
+		RequestDispatcher view = request.getRequestDispatcher("admin/admin.jsp");
+	    view.forward(request, response);
 	}
 
 	/**
