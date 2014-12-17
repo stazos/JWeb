@@ -32,8 +32,7 @@ public class Connexion extends HttpServlet {
 			session.setAttribute("admin", false);
 			if (User.userIsAdmin(id) == true) {
 				session.setAttribute("admin", true);
-				RequestDispatcher view = request.getRequestDispatcher("admin/admin.jsp");
-			    view.forward(request, response);
+				LoadController.LoadAdmin(request, response);
 			} else {
 				RequestDispatcher view = request.getRequestDispatcher("pages/welcome.jsp");
 			    view.forward(request, response);

@@ -28,8 +28,7 @@ public class NewsController extends HttpServlet {
 		
 		News.createNews(title, description);
 		request.setAttribute("success", "creation de la news reussi");
-		RequestDispatcher view = request.getRequestDispatcher("admin/admin.jsp");
-	    view.forward(request, response);
+		LoadController.LoadAdmin(request, response);
 	}
 
 	/**

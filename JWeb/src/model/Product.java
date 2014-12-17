@@ -4,10 +4,45 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import utility.DbUtility;
 
 public class Product {
+
+	private Integer id;
+	private String name;
+	private String photo;
+	private String description;
+	private Float price;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Float getPrice() {
+		return price;
+	}
+
+	public Product(Integer id, String name, String photo, String description, Float price) {
+		this.id = id;
+		this.name = name;
+		this.photo = photo;
+		this.description = description;
+		this.price = price;
+	}
 
 	static public void createProduct(String name, String photo, String description, Float price) {
 		Connection connexion = DbUtility.connectToDB();
@@ -25,39 +60,31 @@ public class Product {
 		}
 	}
 
-	static public String getAllProduct() {
+	static public ArrayList<Product> getAllProduct() {
 		Connection connexion = DbUtility.connectToDB();
 		Statement statement = DbUtility.getConnectStatement(connexion);
-		String jsonObject = "[";
+		ArrayList<Product> listProduct = new ArrayList<Product>();
 		try {
 			String req = "SELECT id, name, photo, description, price FROM product;";
 			System.out.println(req);
 			ResultSet resultat = statement.executeQuery(req);
 			System.out.println(resultat);
 			while (resultat.next()) {
-				if (resultat.isFirst() == false)
-					jsonObject += ", ";
-				jsonObject += "{ ";
-				jsonObject += "id: '" + resultat.getInt("id") + "', ";
-				jsonObject += "name: '" + resultat.getString("name") + "', ";
-				jsonObject += "photo: '" + resultat.getString("photo") + "', ";
-				jsonObject += "description: '" + resultat.getString("description") + "', ";
-				jsonObject += "price: " + resultat.getString("price") + ", ";
-				jsonObject += " }";
+				listProduct.add(new Product(resultat.getInt("id"), resultat.getString("name"), resultat
+						.getString("photo"), resultat.getString("description"), resultat.getFloat("price")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			DbUtility.closeConnexion(connexion, statement);
 		}
-		jsonObject += "]";
-		return jsonObject;
+		return listProduct;
 	}
 
-	static public String getProduct(int id) {
+	static public Product getProduct(int id) {
 		Connection connexion = DbUtility.connectToDB();
 		Statement statement = DbUtility.getConnectStatement(connexion);
-		String jsonObject = "";
+		Product product = null;
 		try {
 			String req = "SELECT name, photo, description, price FROM product WHERE id = " + id + ";";
 			System.out.println(req);
@@ -65,19 +92,14 @@ public class Product {
 			System.out.println(resultat);
 			resultat.next();
 			if (resultat.isFirst() == true) {
-				jsonObject += "{ ";
-				jsonObject += "name: '" + resultat.getString("name") + "', ";
-				jsonObject += "photo: '" + resultat.getString("photo") + "', ";
-				jsonObject += "description: '" + resultat.getString("description") + "', ";
-				jsonObject += "price: " + resultat.getString("price") + ", ";
-				jsonObject += " }";
+				product = new Product(id, resultat.getString("name"), resultat.getString("photo"),
+						resultat.getString("description"), resultat.getFloat("price"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			DbUtility.closeConnexion(connexion, statement);
 		}
-		return jsonObject;
+		return product;
 	}
-
 }

@@ -1,9 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +14,8 @@ public class ProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * POST.
-	 * Attend en params un "name", une "photo", une "description", un float "price".
-	 * créer un produit.
+	 * POST. Attend en params un "name", une "photo", une "description", un
+	 * float "price". créer un produit.
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
@@ -28,7 +25,7 @@ public class ProductController extends HttpServlet {
 		String priceString = request.getParameter("price");
 		System.out.println("name :" + name);
 		Float price = Float.valueOf(priceString);
-		
+
 		// String fileName = request.getParameter("fileName");
 		// if(fileName == null || fileName.equals("")){
 		// throw new ServletException("File Name can't be null or empty");
@@ -58,33 +55,29 @@ public class ProductController extends HttpServlet {
 		// os.close();
 		// fis.close();
 		// System.out.println("File downloaded at client successfully");
-		
+
 		System.out.println(photo);
-		
+
 		Product.createProduct(name, null, description, price);
 
 		request.setAttribute("successProduct", "creation du produit reussi");
-		RequestDispatcher view = request.getRequestDispatcher("admin.jsp");
-	    view.forward(request, response); 
+		LoadController.LoadAdmin(request, response);
 	}
 
 	/**
-	 * GET.
-	 * Attend en params un "id" d'un produit
-	 * retourne les informations de ce produit.
+	 * GET. Attend en params un "id" d'un produit retourne les informations de
+	 * ce produit.
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		String idString = request.getParameter("id");
 		int id = Integer.valueOf(idString);
-		
-		String jsonObject = Product.getProduct(id);
 
-		response.setContentType("application/json");
-		response.setStatus(200);
-		PrintWriter out = response.getWriter();
-		out.print(jsonObject);
-		out.flush();
+		Product product = Product.getProduct(id);
+
+		request.setAttribute("product", product);
+		
+		LoadController.LoadAdmin(request, response);
 	}
 
 }

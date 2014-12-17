@@ -4,10 +4,51 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import utility.DbUtility;
 
 public class User {
+
+	private Integer id;
+	private String firtname;
+	private String lastname;
+	private String email;
+	private Boolean newsletter;
+	private Boolean admin;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public String getFirtname() {
+		return firtname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public Boolean getNewsletter() {
+		return newsletter;
+	}
+
+	public Boolean getAdmin() {
+		return admin;
+	}
+
+	public User(Integer id, String firtname, String lastname, String email, Boolean newsletter, Boolean admin) {
+		this.id = id;
+		this.firtname = firtname;
+		this.lastname = lastname;
+		this.email = email;
+		this.newsletter = newsletter;
+		this.admin = admin;
+	}
 
 	static public void createUser(String firstname, String lastname, String email, String password, String newsletter) {
 		Connection connexion = DbUtility.connectToDB();
@@ -94,36 +135,26 @@ public class User {
 		return result;
 	}
 
-	static public String getUser() {
+	static public ArrayList<User> getUser() {
 		Connection connexion = DbUtility.connectToDB();
 		Statement statement = DbUtility.getConnectStatement(connexion);
-		String jsonObject = "[";
+		ArrayList<User> listUser = new ArrayList<User>();
 		try {
 			String req = "SELECT id, firstname, lastname, email, newsletter, admin, date_inscription FROM user";
 			System.out.println(req);
 			ResultSet resultat = statement.executeQuery(req);
 			System.out.println(resultat);
 			while (resultat.next()) {
-				if (resultat.isFirst() == false)
-					jsonObject += ", ";
-				jsonObject += "{ ";
-				jsonObject += "\"id\": \"" + resultat.getInt("id") + "\", ";
-				jsonObject += "\"firstname\": \"" + resultat.getString("firstname") + "\", ";
-				jsonObject += "\"lastname\": \"" + resultat.getString("lastname") + "\", ";
-				jsonObject += "\"email\": \"" + resultat.getString("email") + "\", ";
-				jsonObject += "\"newsletter\": \"" + resultat.getBoolean("newsletter") + "\", ";
-				jsonObject += "\"admin\": \"" + resultat.getBoolean("admin") + "\", ";
-				jsonObject += "\"date_inscription\": \"" + resultat.getDate("date_inscription") + "\"";
-				jsonObject += " }";
+				listUser.add(new User(resultat.getInt("id"), resultat.getString("firstname"), resultat
+						.getString("lastname"), resultat.getString("email"), resultat.getBoolean("newsletter"),
+						resultat.getBoolean("admin")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			DbUtility.closeConnexion(connexion, statement);
 		}
-		jsonObject += "]";
-		System.out.println(jsonObject);
-		return jsonObject;
+		return listUser;
 	}
 
 	static public void userSetAdmin(int id) {
