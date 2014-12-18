@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import utility.DbUtility;
 
@@ -24,33 +25,25 @@ public class Panier {
 		}
 	}
 
-	static public String getProductPanier(int idUser) {
+	static public ArrayList<Product> getProductPanier(int idUser) {
 		Connection connexion = DbUtility.connectToDB();
 		Statement statement = DbUtility.getConnectStatement(connexion);
-		String jsonObject = "[";
+		ArrayList<Product> listProduct = new ArrayList<Product>();
 		try {
 			String req = "SELECT product.id, product.name, product.photo, product.description, product.price "
 					+ "FROM product, panier WHERE product.id = panier.idProduct AND panier.idUser = " + idUser + ";";
 			System.out.println(req);
 			ResultSet resultat = statement.executeQuery(req);
 			while (resultat.next()) {
-				if (resultat.isFirst() == false)
-					jsonObject += ", ";
-				jsonObject += "{ ";
-				jsonObject += "id: '" + resultat.getInt("id") + "', ";
-				jsonObject += "name: '" + resultat.getString("name") + "', ";
-				jsonObject += "photo: '" + resultat.getString("photo") + "', ";
-				jsonObject += "description: '" + resultat.getString("description") + "', ";
-				jsonObject += "price: " + resultat.getString("price") + ", ";
-				jsonObject += " }";
+				listProduct.add(new Product(resultat.getInt("id"), resultat.getString("name"), resultat
+						.getString("photo"), resultat.getString("description"), resultat.getFloat("price")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			DbUtility.closeConnexion(connexion, statement);
 		}
-		jsonObject += "]";
-		return jsonObject;
+		return listProduct;
 	}
 
 	static public void rmProductPanier(int idUser, int idProduct) {
@@ -67,7 +60,7 @@ public class Panier {
 			DbUtility.closeConnexion(connexion, statement);
 		}
 	}
-	
+
 	static public void rmAllProductPanier(int idUser) {
 		Connection connexion = DbUtility.connectToDB();
 		Statement statement = DbUtility.getConnectStatement(connexion);

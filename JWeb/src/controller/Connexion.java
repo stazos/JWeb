@@ -34,8 +34,7 @@ public class Connexion extends HttpServlet {
 				session.setAttribute("admin", true);
 				LoadController.LoadAdmin(request, response);
 			} else {
-				RequestDispatcher view = request.getRequestDispatcher("pages/welcome.jsp");
-			    view.forward(request, response);
+				LoadController.LoadUser(request, response);
 			}
 		} else {
 			request.setAttribute("error", "Error utilisateur non existant");

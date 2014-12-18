@@ -22,9 +22,9 @@ public class Deconnexion extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		session.setAttribute("idUser", null);
-		session.setAttribute("admin", false);		
+		session.setAttribute("admin", false);
+		request.setAttribute("successDeconnect", "Error utilisateur non existant");
 		RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 	    view.forward(request, response);
-		request.setAttribute("successDeconnect", "Error utilisateur non existant");
 	}
 }

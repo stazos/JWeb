@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,12 +38,8 @@ public class NewsController extends HttpServlet {
 	 * return toute les news.
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		String jsonObject = News.getNews();
-		response.setContentType("application/json");
-		response.setStatus(200);
-		PrintWriter out = response.getWriter();
-		out.print(jsonObject);
-		out.flush();
+		ArrayList<News> listNews = News.getNews();
+		
 	}
 
 }

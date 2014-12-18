@@ -48,8 +48,7 @@ public class Inscription extends HttpServlet {
 					session.setAttribute("admin", true);
 					LoadController.LoadAdmin(request, response);
 				} else {
-					RequestDispatcher view = request.getRequestDispatcher("pages/welcome.jsp");
-				    view.forward(request, response); 
+					LoadController.LoadUser(request, response); 
 				}
 				// RequestDispatcher view =
 				// request.getRequestDispatcher("pages/welcome.jsp");

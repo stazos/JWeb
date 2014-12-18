@@ -4,10 +4,34 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.sql.Date;
 
 import utility.DbUtility;
 
 public class News {
+
+	private String title;
+	private String description;
+	private Date date;
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public News(String title, String description, Date date) {
+		this.title = title;
+		this.description = description;
+		this.date = date;
+	}
 
 	static public void createNews(String title, String description) {
 		Connection connexion = DbUtility.connectToDB();
@@ -24,31 +48,24 @@ public class News {
 		}
 	}
 
-	static public String getNews() {
+	static public ArrayList<News> getNews() {
 		Connection connexion = DbUtility.connectToDB();
 		Statement statement = DbUtility.getConnectStatement(connexion);
-		String jsonObject = "[";
+		ArrayList<News> listNews = new ArrayList<News>();
 		try {
 			String req = "SELECT title, description, date FROM news;";
 			System.out.println(req);
 			ResultSet resultat = statement.executeQuery(req);
 			System.out.println(resultat);
 			while (resultat.next()) {
-				if (resultat.isFirst() == false)
-					jsonObject += ", ";
-				jsonObject += "{ ";
-				jsonObject += "\"title\": \"" + resultat.getString("title") + "\", ";
-				jsonObject += "\"description\": \"" + resultat.getString("description") + "\", ";
-				jsonObject += "\"date\": \"" + resultat.getDate("date") + "\"";
-				jsonObject += " }";
+				listNews.add(new News(resultat.getString("title"), resultat.getString("description"), resultat
+						.getDate("date")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			DbUtility.closeConnexion(connexion, statement);
 		}
-		jsonObject += "]";
-		System.out.println(jsonObject);
-		return jsonObject;
+		return listNews;
 	}
 }

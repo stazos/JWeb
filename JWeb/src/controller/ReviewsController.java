@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -48,13 +49,7 @@ public class ReviewsController extends HttpServlet {
 		String idString = request.getParameter("id");
 		int idProduct = Integer.valueOf(idString);
 		
-		String jsonObject = Reviews.getReviewsForProduct(idProduct);
-
-		response.setContentType("application/json");
-		response.setStatus(200);
-		PrintWriter out = response.getWriter();
-		out.print(jsonObject);
-		out.flush();
+		ArrayList<Reviews> listReviews = Reviews.getReviewsForProduct(idProduct);
 	}
 
 }
