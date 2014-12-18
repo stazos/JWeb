@@ -22,19 +22,23 @@ public class UpdateUserController extends HttpServlet {
 		User.userUnsetNewsletter();
 		User.userUnsetAdmin();
 		
-		for (int i = 0; i < listIdNewsletter.length; i++) {
-			Integer id = Integer.valueOf(listIdNewsletter[i]);
-			User.userSetNewsletter(id);
-		}
-		for (int i = 0; i < listIdAdmin.length; i++) {
-			Integer id = Integer.valueOf(listIdAdmin[i]);
-			User.userSetAdmin(id);
-		}
-		for (int i = 0; i < listIdUserDelete.length; i++) {
-			Integer id = Integer.valueOf(listIdUserDelete[i]);
-			User.userDelete(id);
-		}
+		System.out.println(listIdNewsletter);
 		
+		if (listIdNewsletter != null)
+			for (int i = 0; i < listIdNewsletter.length; i++) {
+				Integer id = Integer.valueOf(listIdNewsletter[i]);
+				User.userSetNewsletter(id);
+			}
+		if (listIdAdmin != null)
+			for (int i = 0; i < listIdAdmin.length; i++) {
+				Integer id = Integer.valueOf(listIdAdmin[i]);
+				User.userSetAdmin(id);
+			}
+		if (listIdUserDelete != null)
+			for (int i = 0; i < listIdUserDelete.length; i++) {
+				Integer id = Integer.valueOf(listIdUserDelete[i]);
+				User.userDelete(id);
+			}
 		request.setAttribute("successUser", "mise a jour base de donné reussi");
 		LoadController.LoadAdmin(request, response);
 	}

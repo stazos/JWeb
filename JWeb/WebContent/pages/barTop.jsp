@@ -15,8 +15,13 @@
     	{
         	%>
         	<div class="login">
-        		<a href="#">Mon Panier</a>
-        		<a href="#">Déconnexion</a>
+        		<form method="POST" action="panier.do">
+        			<input type="Submit" class="regular" value="Mon Panier">
+        			<input type="hidden" name="id" value="<% out.print(i); %>">
+        		</form>
+        		<form method="POST" action="deconnexion.do">
+        			<input type="Submit" class="regular" value="Déconnexion"></a>
+        		</form>
         	</div>
         	<%
     	}

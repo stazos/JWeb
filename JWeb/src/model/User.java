@@ -11,7 +11,7 @@ import utility.DbUtility;
 public class User {
 
 	private Integer id;
-	private String firtname;
+	private String firstname;
 	private String lastname;
 	private String email;
 	private Boolean newsletter;
@@ -111,7 +111,7 @@ public class User {
 		}
 		return id;
 	}
-
+	
 	static public Boolean userIsAdmin(int id) {
 		Connection connexion = DbUtility.connectToDB();
 		Statement statement = DbUtility.getConnectStatement(connexion);

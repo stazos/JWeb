@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -23,13 +25,15 @@
 
 			<div class="page-container">
 				<div class="table">
-					<%
-						for (i = 0; i != 10; i++) {
+				<%
+				ArrayList<Product> listProduct = (ArrayList<Product>) request.getAttribute("listProduct");
+				if (listProduct != null)
+					for (Product product : listProduct) {
 					%>
 					<div class="li">
 						<div class="top purple white">
-							<h1>Poêle</h1>
-							<div class="circle pink">4€</div>
+							<h1><% out.println(product.getName()); %></h1>
+							<div class="circle pink"><% out.println(product.getPrice()); %>€</div>
 						</div>
 						<div class="bottom">
 							<img width="199px" alt=""
@@ -37,8 +41,7 @@
 							<p>
 								<span>Description</span>
 							</p>
-							<p>Jolie peite description qui sert juste de test, c'est
-								énorme</p>
+							<p><% out.println(product.getDescription()); %></p>
 							<div class="sign">
 								<input type="button" value="Voir"><input type="button"
 									value="Ajouter au Panier">

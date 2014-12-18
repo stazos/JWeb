@@ -39,6 +39,15 @@
 		<servlet-name>Connexion</servlet-name>
 		<url-pattern>/connexion.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Deconnexion</servlet-name>
+		<servlet-class>controller.Deconnexion</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Deconnexion</servlet-name>
+		<url-pattern>/deconnexion.do</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>GetUser</servlet-name>
@@ -120,6 +129,24 @@
 	<servlet-mapping>
 		<servlet-name>RmUser</servlet-name>
 		<url-pattern>/rmUser.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UpdateUser</servlet-name>
+		<servlet-class>controller.UpdateUserController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateUser</servlet-name>
+		<url-pattern>/updateUser.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UpdateCatalog</servlet-name>
+		<servlet-class>controller.UpdateCatalogController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateCatalog</servlet-name>
+		<url-pattern>/updateCatalog.do</url-pattern>
 	</servlet-mapping>
 
 </web-app>

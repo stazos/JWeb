@@ -1,4 +1,4 @@
-<div class="boite">
+<div class="Box right">
 	<center><h1>Ajouter un produit</h1></center>
 	<form method="POST" action="product.do">
 		<input type="text" name="title" placeholder="Nom du produit" /><br>

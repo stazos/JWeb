@@ -1,31 +1,28 @@
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@page import="java.util.Iterator"%>
 <%@page import="model.*"%>
 <%@page import="java.util.ArrayList"%>
-<div class="boite users">
-	<center>
-		<h1>Listes des Utilisateurs</h1>
-	</center>
-	<table>
+<div class="Box left">
+	<center><h1>Liste des Utilisateurs</h1></center>
+	<table class="left">
 		<thead>
 			<tr>
-				<td>id</td>
-				<td><center>Statut</center></td>
-				<td><center>Prénom</center></td>
-				<td><center>Nom</center></td>
-				<td><center>Email</center></td>
-				<td><center>Newsletter</center></td>
-				<td><center>Admin/User</center></td>
-				<td><center>Supprimer</center></td>
+				<td><b>id</b></td>
+				<td><b>Statut</b></td>
+				<td><b>Prénom</b></td>
+				<td><b>Nom</b></td>
+				<td><b>Email</b></td>
+				<td><b>Newsletter</b></td>
+				<td><b>Admin/User</b></td>
+				<td><b>Supprimer</b></td>
 			</tr>
 
 		</thead>
 		<tbody>
 			<form method="POST" action="updateUser.do">
+			<input type="submit" value="Modifier">
 			<%
-				ArrayList<User> list = (ArrayList<User>) request.getAttribute("listUser");
-				if (list != null)
-					for (User user : list) {
+				ArrayList<User> listUser = (ArrayList<User>) request.getAttribute("listUser");
+				if (listUser != null)
+					for (User user : listUser) {
 						out.println("<tr><td>" + user.getId() + "</td>");
 						if (user.getAdmin() == true)
 							out.println("<td>Admin</td>");
@@ -35,17 +32,17 @@
 								+ user.getLastname() + "</td>" + "<td>"
 								+ user.getEmail() + "</td>");
 						if (user.getNewsletter() == true)
-							out.println("<td><input type='checkbox' name='newsletter[" + user.getId()+ "]' checked /></td>");
+							out.println("<td><input type='checkbox' name='newsletter' value='" + user.getId() + "' checked /></td>");
 						else
-							out.println("<td><input type='checkbox' name='newsletter[" + user.getId()+ "]'/></td>");
+							out.println("<td><input type='checkbox' name='newsletter'value='" + user.getId() + "'/></td>");
 						if (user.getAdmin() == true)
-							out.println("<td><input type='checkbox' name='admin[" + user.getId()+ "]' checked /></td>");
+							out.println("<td><input type='checkbox' name='admin' value='" + user.getId() + "' checked /></td>");
 						else
-							out.println("<td><input type='checkbox' name='admin[" + user.getId()+ "]'/></td>");
-						out.println("<td><input type='checkbox' name='delete[" + user.getId()+ "]' /></td>");
+							out.println("<td><input type='checkbox' name='admin' value='" + user.getId() + "'/></td>");
+						out.println("<td><input type='checkbox' name='delete' value='" + user.getId() + "' /></td></tr>");
 					}
 			%>
-				<input type="submit" value="Modifier">
+				
 			</form>
 		</tbody>
 	</table>
