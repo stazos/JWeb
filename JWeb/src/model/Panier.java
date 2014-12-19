@@ -45,6 +45,24 @@ public class Panier {
 		}
 		return listProduct;
 	}
+	
+	static public int getNumberProductPanier(int idUser) {
+		Connection connexion = DbUtility.connectToDB();
+		Statement statement = DbUtility.getConnectStatement(connexion);
+		int nb = 0;
+		try {
+			String req = "SELECT COUNT(*) as total FROM panier WHERE idUser = " + idUser + ";";
+			System.out.println(req);
+			ResultSet resultat = statement.executeQuery(req);
+			resultat.next();
+			nb = resultat.getInt("total");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtility.closeConnexion(connexion, statement);
+		}
+		return nb;
+	}
 
 	static public void rmProductPanier(int idUser, int idProduct) {
 		Connection connexion = DbUtility.connectToDB();

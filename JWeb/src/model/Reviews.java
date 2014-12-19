@@ -36,7 +36,7 @@ public class Reviews {
 		Connection connexion = DbUtility.connectToDB();
 		Statement statement = DbUtility.getConnectStatement(connexion);
 		try {
-			String req = "INSERT INTO reviews VALUES (null, " + idProduct + ", " + idUser + ", " + review + ");";
+			String req = "INSERT INTO reviews VALUES (null, " + idProduct + ", " + idUser + ", \"" + review + "\");";
 			System.out.println(req);
 			int statut = statement.executeUpdate(req);
 			System.out.println("statut -> " + statut);
@@ -52,13 +52,13 @@ public class Reviews {
 		Statement statement = DbUtility.getConnectStatement(connexion);
 		ArrayList<Reviews> listReview = new ArrayList<Reviews>();
 		try {
-			String req = "SELECT reviews.id, reviews.review, user.name FROM reviews, user "
+			String req = "SELECT reviews.id, reviews.review, user.firstname FROM reviews, user "
 					+ "WHERE reviews.idUser = user.id AND reviews.idProduct = " + idProduct + ";";
 			System.out.println(req);
 			ResultSet resultat = statement.executeQuery(req);
 			while (resultat.next()) {
 				listReview.add(new Reviews(resultat.getInt("id"), resultat.getString("review"), resultat
-						.getString("name")));
+						.getString("firstname")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

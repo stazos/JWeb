@@ -1,13 +1,17 @@
 body {
 	font-family: 'Marck Script', cursive;
-	background: url('../img/background.jpg') no-repeat fixed center center/cover
-		transparent;
 	margin: 0 auto;
 }
+
+.bg {
+	background: url('../img/background.jpg') no-repeat fixed center center/cover transparent;
+}
+
 
 h1 {
 	color: gray;
 	margin: 0 auto;
+	font-family: 'Marck Script', cursive;
 }
 
 .bar-top {

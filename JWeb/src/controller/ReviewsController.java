@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -32,11 +31,11 @@ public class ReviewsController extends HttpServlet {
 		Integer idUser = (Integer) session.getAttribute("idUser");
 
 		Reviews.createReview(idProduct, idUser, review);
-
-		response.setStatus(200);
-		PrintWriter out = response.getWriter();
-		out.print("SUCCESS");
-		out.flush();
+		LoadController.LoadProduct(request, response, idString);
+//		response.setStatus(200);
+//		PrintWriter out = response.getWriter();
+//		out.print("SUCCESS");
+//		out.flush();
 	}
 
 	/**

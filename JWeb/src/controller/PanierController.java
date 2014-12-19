@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,11 +33,11 @@ public class PanierController extends HttpServlet {
 		Integer idUser = (Integer) session.getAttribute("idUser");
 		
 		Panier.createPanier(idUser, idProduct);
-		
-		response.setStatus(200);
-		PrintWriter out = response.getWriter();
-		out.print("SUCCESS");
-		out.flush();
+		LoadController.LoadUser(request, response);
+//		response.setStatus(200);
+//		PrintWriter out = response.getWriter();
+//		out.print("SUCCESS");
+//		out.flush();
 	}
 
 	/**
@@ -50,8 +51,7 @@ public class PanierController extends HttpServlet {
 		Integer idUser = (Integer) session.getAttribute("idUser");
 		
 		ArrayList<Product> listProduct = Panier.getProductPanier(idUser);
-
-		
+		LoadController.LoadShop(request, response);
 	}
 
 }

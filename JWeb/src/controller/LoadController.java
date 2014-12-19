@@ -7,9 +7,11 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 import model.News;
+import model.Panier;
 import model.Product;
+import model.Reviews;
 import model.User;
 
 public class LoadController {
@@ -33,11 +35,43 @@ public class LoadController {
 
 		ArrayList<News> listNews = News.getNews();
 		ArrayList<Product> listProduct = Product.getAllProduct();
-
+		
+		HttpSession session = request.getSession();
+		Integer idString = (Integer) session.getAttribute("idUser");
+		int id = Integer.valueOf(idString);
+		
+		int inPanier = Panier.getNumberProductPanier(id);
 		request.setAttribute("listNews", listNews);
 		request.setAttribute("listProduct", listProduct);
+		request.setAttribute("inPanier", inPanier);
 		RequestDispatcher view = request.getRequestDispatcher("pages/welcome.jsp");
 		view.forward(request, response);
 	}
+	
+	static public void LoadProduct(HttpServletRequest request, HttpServletResponse response, String idString) throws IOException,
+			ServletException {
+		
+		int id = Integer.valueOf(idString);
+		Product product = Product.getProduct(id);
+		ArrayList<Reviews> listReviews = Reviews.getReviewsForProduct(id);
+
+		request.setAttribute("Product", product);
+		request.setAttribute("ListReviews", listReviews);
+		RequestDispatcher view = request.getRequestDispatcher("pages/product.jsp");
+		view.forward(request, response);
+	}
+	
+	static public void LoadShop(HttpServletRequest request, HttpServletResponse response) throws IOException,
+	ServletException {
+
+		HttpSession session = request.getSession();
+		Integer idString = (Integer) session.getAttribute("idUser");
+		int id = Integer.valueOf(idString);
+		ArrayList<Product> paniers = (ArrayList<Product>) Panier.getProductPanier(id);
+
+		request.setAttribute("Panier", paniers);
+		RequestDispatcher view = request.getRequestDispatcher("pages/panier.jsp");
+		view.forward(request, response);
+}
 
 }

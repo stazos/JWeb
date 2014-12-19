@@ -19,7 +19,7 @@
 	<link type="text/css" rel="stylesheet" href="css/inscription.css" />
 	<title>Luncher - Catalogue</title>
 </head>
-<body>
+<body class="bg">
 	<%@ include file="pages/barTop.jsp" %>
 	<%@ include file="pages/inscription.jsp" %>
 </body>

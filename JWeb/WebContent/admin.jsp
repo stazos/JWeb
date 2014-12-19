@@ -17,13 +17,14 @@
 <link type="text/css" rel="stylesheet" href="css/admin.css" />
 <link type="text/css" rel="stylesheet" href="css/table.css" />
 
-<title>Insert title here</title>
+<title>Panneau de contrôle</title>
 </head>
 <body>
 	<%@ include file="pages/barTop.jsp"%>
 
 	<%@ include file="admin/news.jsp"%>
 	<%@ include file="admin/products.jsp"%>
+	<%@ include file="admin/listNews.jsp"%>
 	<%@ include file="admin/catalogue.jsp"%>	
 	<%@ include file="admin/users.jsp"%>
 </body>

@@ -48,6 +48,15 @@
 		<servlet-name>Deconnexion</servlet-name>
 		<url-pattern>/deconnexion.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>GetProduct</servlet-name>
+		<servlet-class>controller.GetProductController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetProduct</servlet-name>
+		<url-pattern>/getProduct.do</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>GetUser</servlet-name>
