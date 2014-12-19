@@ -2,7 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <div class="Box left">
 	<center><h1>Liste des Utilisateurs</h1></center>
-	<table class="left">
+	<table>
 		<thead>
 			<tr>
 				<td><b>id</b></td>

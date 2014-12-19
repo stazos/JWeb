@@ -24,7 +24,7 @@
 
 	<%@ include file="admin/news.jsp"%>
 	<%@ include file="admin/products.jsp"%>
-	<%@ include file="admin/users.jsp"%>
 	<%@ include file="admin/catalogue.jsp"%>	
+	<%@ include file="admin/users.jsp"%>
 </body>
 </html>

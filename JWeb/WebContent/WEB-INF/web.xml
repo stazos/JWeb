@@ -148,5 +148,14 @@
 		<servlet-name>UpdateCatalog</servlet-name>
 		<url-pattern>/updateCatalog.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UpdateNews</servlet-name>
+		<servlet-class>controller.UpdateNewsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateNews</servlet-name>
+		<url-pattern>/updateNews.do</url-pattern>
+	</servlet-mapping>
 
 </web-app>

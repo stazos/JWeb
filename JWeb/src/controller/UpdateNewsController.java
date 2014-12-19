@@ -7,22 +7,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Product;
+import model.News;
 
-public class UpdateCatalogController extends HttpServlet {
+public class UpdateNewsController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-		String[] listIdUserDelete = request.getParameterValues("delete");
-		
-		if (listIdUserDelete != null)
-			for (int i = 0; i < listIdUserDelete.length; i++) {
-				Integer id = Integer.valueOf(listIdUserDelete[i]);
-				Product.productDelete(id);
+		String[] listIdNewsDelete = request.getParameterValues("delete");
+
+		if (listIdNewsDelete != null)
+			for (int i = 0; i < listIdNewsDelete.length; i++) {
+				Integer id = Integer.valueOf(listIdNewsDelete[i]);
+				News.newsDelete(id);
 			}
-		request.setAttribute("success", "Article supprimé");
+		request.setAttribute("success", "mise a jour base de donné reussi");
 		LoadController.LoadAdmin(request, response);
 	}
 

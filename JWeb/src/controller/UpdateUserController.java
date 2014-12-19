@@ -39,7 +39,7 @@ public class UpdateUserController extends HttpServlet {
 				Integer id = Integer.valueOf(listIdUserDelete[i]);
 				User.userDelete(id);
 			}
-		request.setAttribute("successUser", "mise a jour base de donné reussi");
+		request.setAttribute("success", "mise a jour base de donné reussi");
 		LoadController.LoadAdmin(request, response);
 	}
 

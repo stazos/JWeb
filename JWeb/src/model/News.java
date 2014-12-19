@@ -11,10 +11,15 @@ import utility.DbUtility;
 
 public class News {
 
+	private String id;
 	private String title;
 	private String description;
 	private Date date;
 
+	public String getId() {
+		return id;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -27,7 +32,8 @@ public class News {
 		return date;
 	}
 
-	public News(String title, String description, Date date) {
+	public News(String id, String title, String description, Date date) {
+		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.date = date;
@@ -53,13 +59,12 @@ public class News {
 		Statement statement = DbUtility.getConnectStatement(connexion);
 		ArrayList<News> listNews = new ArrayList<News>();
 		try {
-			String req = "SELECT title, description, date FROM news;";
+			String req = "SELECT id, title, description, date FROM news;";
 			System.out.println(req);
 			ResultSet resultat = statement.executeQuery(req);
 			System.out.println(resultat);
 			while (resultat.next()) {
-				listNews.add(new News(resultat.getString("title"), resultat.getString("description"), resultat
-						.getDate("date")));
+				listNews.add(new News(resultat.getString("id"), resultat.getString("title"), resultat.getString("description"), resultat.getDate("date")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -67,5 +72,20 @@ public class News {
 			DbUtility.closeConnexion(connexion, statement);
 		}
 		return listNews;
+	}
+	
+	static public void newsDelete(int id) {
+		Connection connexion = DbUtility.connectToDB();
+		Statement statement = DbUtility.getConnectStatement(connexion);
+		try {
+			String req = "DELETE FROM news WHERE id = " + id + ";";
+			System.out.println(req);
+			int statut = statement.executeUpdate(req);
+			System.out.println("statut -> " + statut);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbUtility.closeConnexion(connexion, statement);
+		}
 	}
 }

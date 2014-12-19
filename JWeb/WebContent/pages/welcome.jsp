@@ -32,8 +32,8 @@
 					%>
 					<div class="li">
 						<div class="top purple white">
-							<h1><% out.println(product.getName()); %></h1>
-							<div class="circle pink"><% out.println(product.getPrice()); %>€</div>
+							<h1><%= product.getName() %></h1>
+							<div class="circle pink"><%= product.getPrice() %>€</div>
 						</div>
 						<div class="bottom">
 							<img width="199px" alt=""
@@ -41,7 +41,7 @@
 							<p>
 								<span>Description</span>
 							</p>
-							<p><% out.println(product.getDescription()); %></p>
+							<p><%= product.getDescription() %></p>
 							<div class="sign">
 								<input type="button" value="Voir"><input type="button"
 									value="Ajouter au Panier">

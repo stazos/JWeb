@@ -18,11 +18,12 @@ public class LoadController {
 			ServletException {
 
 		ArrayList<User> listUser = User.getUser();
-
+		ArrayList<News> listNews = News.getNews();
 		ArrayList<Product> listProduct = Product.getAllProduct();
 
 		request.setAttribute("listUser", listUser);
 		request.setAttribute("listProduct", listProduct);
+		request.setAttribute("listNews", listNews);
 		RequestDispatcher view = request.getRequestDispatcher("admin.jsp");
 		view.forward(request, response);
 	}

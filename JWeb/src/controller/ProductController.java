@@ -60,7 +60,7 @@ public class ProductController extends HttpServlet {
 
 		Product.createProduct(name, null, description, price);
 
-		request.setAttribute("successProduct", "creation du produit reussi");
+		request.setAttribute("success", "creation du produit reussi");
 		LoadController.LoadAdmin(request, response);
 	}
 
