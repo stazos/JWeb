@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import model.News;
 import model.Panier;
 import model.Product;
@@ -15,6 +16,9 @@ import model.Reviews;
 import model.User;
 
 public class LoadController {
+	
+	static private ArrayList<News> TOTO_NEWS;
+	static private ArrayList<Product> TOTO_PRODUCT;
 
 	static public void LoadAdmin(HttpServletRequest request, HttpServletResponse response) throws IOException,
 			ServletException {
@@ -30,11 +34,21 @@ public class LoadController {
 		view.forward(request, response);
 	}
 
+	public ArrayList<News> getNews() {
+		return TOTO_NEWS;
+	}
+	
+	public ArrayList<Product> getListProduct() {
+		return TOTO_PRODUCT;
+	}
+	
 	static public void LoadUser(HttpServletRequest request, HttpServletResponse response) throws IOException,
 			ServletException {
 
 		ArrayList<News> listNews = News.getNews();
+		TOTO_NEWS = listNews;
 		ArrayList<Product> listProduct = Product.getAllProduct();
+		TOTO_PRODUCT = listProduct;
 		
 		HttpSession session = request.getSession();
 		Integer idString = (Integer) session.getAttribute("idUser");
