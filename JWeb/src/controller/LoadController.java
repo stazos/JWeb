@@ -39,8 +39,8 @@ public class LoadController {
 		HttpSession session = request.getSession();
 		Integer idString = (Integer) session.getAttribute("idUser");
 		int id = Integer.valueOf(idString);
-		
 		int inPanier = Panier.getNumberProductPanier(id);
+
 		request.setAttribute("listNews", listNews);
 		request.setAttribute("listProduct", listProduct);
 		request.setAttribute("inPanier", inPanier);
@@ -68,7 +68,9 @@ public class LoadController {
 		Integer idString = (Integer) session.getAttribute("idUser");
 		int id = Integer.valueOf(idString);
 		ArrayList<Product> paniers = (ArrayList<Product>) Panier.getProductPanier(id);
-
+		int inPanier = Panier.getNumberProductPanier(id);
+		
+		request.setAttribute("inPanier", inPanier);
 		request.setAttribute("Panier", paniers);
 		RequestDispatcher view = request.getRequestDispatcher("pages/panier.jsp");
 		view.forward(request, response);

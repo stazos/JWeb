@@ -1,16 +1,29 @@
 <div class="bar-top">
 	<h1>Luncher - Catalogue</h1>
 	<%
-		Integer i = (Integer)session.getAttribute("idUser");
-    	if (i != null)
+		Integer id = (Integer)session.getAttribute("idUser");
+		Boolean adm = (Boolean)session.getAttribute("admin");
+    	if (id != null)
     	{
         	%>
         	<div class="login">
-        		<form method="GET" action="panier.do">
-        			<input type="Submit" class="regular" value="Mon Panier(<%= request.getAttribute("inPanier")%>)">
-        		</form>
-        		<form method="POST" action="deconnexion.do">
-        			<input type="Submit" class="regular" value="Déconnexion"></a>
+    	    	<%
+        			if (adm != true)
+        			{
+	        		%>
+       					
+		        		<form style="display: inline-block;" method="POST" action="getAllProduct.do">
+        					<input type="Submit" class="regular" value="Le Catalogue">
+        				</form>
+        				<form style="display: inline-block;" method="GET" action="panier.do">
+        					<input type="Submit" class="regular" value="Mon Panier(<%= request.getAttribute("inPanier")%>)">
+        				</form>
+        				
+        			<%
+        			}
+        		%>
+        		<form style="display: inline-block;" method="POST" action="deconnexion.do">
+        			<input type="Submit" class="regular" value="Déconnexion">
         		</form>
         	</div>
         	<%

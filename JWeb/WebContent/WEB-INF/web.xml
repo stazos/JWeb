@@ -50,6 +50,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>GetAllProduct</servlet-name>
+		<servlet-class>controller.GetAllProductController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetAllProduct</servlet-name>
+		<url-pattern>/getAllProduct.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>GetProduct</servlet-name>
 		<servlet-class>controller.GetProductController</servlet-class>
 	</servlet>

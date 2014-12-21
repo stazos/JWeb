@@ -31,9 +31,10 @@ public class RmPanierController extends HttpServlet {
 		} else {
 			Panier.rmAllProductPanier(idUser);
 		}
-		response.setStatus(200);
-		PrintWriter out = response.getWriter();
-		out.print("SUCCESS");
-		out.flush();
+		LoadController.LoadShop(request, response);
+//		response.setStatus(200);
+//		PrintWriter out = response.getWriter();
+//		out.print("SUCCESS");
+//		out.flush();
 	}
 }
