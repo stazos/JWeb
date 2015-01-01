@@ -3,6 +3,9 @@
 	Integer id = (Integer)session.getAttribute("idUser");
 	Boolean adm = (Boolean)session.getAttribute("admin");
 %>
+<jsp:useBean id="shop" class="controller.LoadController" scope="session"/>
+<jsp:setProperty name="shop" property="*"/>
+
 <div class="bar-top">
 	<h1>Luncher - Catalogue - <%= date %></h1>
 	<%
@@ -20,7 +23,7 @@
         					<input type="Submit" class="regular" value="Le Catalogue">
         				</form>
         				<form style="display: inline-block;" method="GET" action="panier.do">
-        					<input type="Submit" class="regular" value="Mon Panier(<%= request.getAttribute("inPanier")%>)">
+        					<input type="Submit" class="regular" value="Mon Panier(<%= shop.getNbPanier()%>)">
         				</form>
         				
         			<%

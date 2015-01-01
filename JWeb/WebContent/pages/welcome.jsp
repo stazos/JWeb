@@ -2,8 +2,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.*"%>
 
-<jsp:useBean id="user" class="controller.LoadController" scope="session"/>
-<jsp:setProperty name="user" property="*"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,7 +22,7 @@
 			</div>
 			<marquee id="newsContainer" class="defileParent" onmouseover="this.stop()" onmouseout="this.start()" direction="left" scrollamount="5">
 			<%
-				ArrayList<News> listNews = user.getNews();//(ArrayList<News>) request.getAttribute("listNews");
+				ArrayList<News> listNews = shop.getNews();
 				if (listNews != null)
 					for (News news : listNews)
 					{
@@ -38,7 +36,7 @@
 			<div class="page-container">
 				<div class="table">
 				<%
-				ArrayList<Product> listProduct = (ArrayList<Product>) request.getAttribute("listProduct");//user.getListProduct();
+				ArrayList<Product> listProduct = shop.getListProduct();
 				if (listProduct != null)
 					for (Product product : listProduct) {
 					%>

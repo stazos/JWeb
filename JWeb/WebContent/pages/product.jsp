@@ -25,7 +25,7 @@
 			</div>
 			<marquee id="newsContainer" class="defileParent" onmouseover="this.stop()" onmouseout="this.start()" direction="left" scrollamount="5">
 			<%
-				ArrayList<News> listNews = (ArrayList<News>) request.getAttribute("listNews");
+				ArrayList<News> listNews = shop.getNews();
 				if (listNews != null)
 					for (News news : listNews)
 					{
@@ -38,7 +38,7 @@
 
 			<div class="page-container">
 				<%
-				Product product = (Product) request.getAttribute("Product");
+				Product product = shop.getProduct();
 				if (product != null)
 				{
 					%>
@@ -76,7 +76,7 @@
 		<div class="module">
 			<h1>Les avis des utilisateurs</h1>
 			<%
-			ArrayList<Reviews> listReviews = (ArrayList<Reviews>) request.getAttribute("ListReviews");
+			ArrayList<Reviews> listReviews = shop.getReviews();
 			if (listReviews != null)
 				for (Reviews review : listReviews)
 				{
