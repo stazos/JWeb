@@ -50,7 +50,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><img width="500px" alt="" src="http://g-ecx.images-amazon.com/images/G/02/uk/pcs/aplus/kitchen/JamieOliverAnniversaryFrypan._V355316657_.jpg"></td>
+								<td><img width="500px" alt="" src="<%= product.getPhoto() %>"></td>
 							</tr>
 							<tr>
 								<td><%= product.getDescription() %></td>

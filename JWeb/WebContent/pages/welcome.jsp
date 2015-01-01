@@ -38,7 +38,7 @@
 			<div class="page-container">
 				<div class="table">
 				<%
-				ArrayList<Product> listProduct = user.getListProduct();//(ArrayList<Product>) request.getAttribute("listProduct");
+				ArrayList<Product> listProduct = (ArrayList<Product>) request.getAttribute("listProduct");//user.getListProduct();
 				if (listProduct != null)
 					for (Product product : listProduct) {
 					%>
@@ -49,7 +49,7 @@
 						</div>
 						<div class="bottom">
 							<img width="199px" alt=""
-								src="http://g-ecx.images-amazon.com/images/G/02/uk/pcs/aplus/kitchen/JamieOliverAnniversaryFrypan._V355316657_.jpg">
+								src="<%= product.getPhoto() %>">
 							<p>
 								<span>Description</span>
 							</p>

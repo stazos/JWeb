@@ -39,7 +39,7 @@
 		<servlet-name>Connexion</servlet-name>
 		<url-pattern>/connexion.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>Deconnexion</servlet-name>
 		<servlet-class>controller.Deconnexion</servlet-class>
@@ -48,7 +48,7 @@
 		<servlet-name>Deconnexion</servlet-name>
 		<url-pattern>/deconnexion.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>GetAllProduct</servlet-name>
 		<servlet-class>controller.GetAllProductController</servlet-class>
@@ -57,7 +57,7 @@
 		<servlet-name>GetAllProduct</servlet-name>
 		<url-pattern>/getAllProduct.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>GetProduct</servlet-name>
 		<servlet-class>controller.GetProductController</servlet-class>
@@ -93,7 +93,7 @@
 		<servlet-name>News</servlet-name>
 		<url-pattern>/news.do</url-pattern>
 	</servlet-mapping>
-	
+
 
 	<servlet>
 		<servlet-name>Newsletter</servlet-name>
@@ -116,6 +116,12 @@
 	<servlet>
 		<servlet-name>Product</servlet-name>
 		<servlet-class>controller.ProductController</servlet-class>
+		<multipart-config>
+			<location>/tmp</location>
+			<max-file-size>10485760</max-file-size> <!-- 10 Mo -->
+			<max-request-size>52428800</max-request-size> <!-- 5 x 10 Mo -->
+			<file-size-threshold>1048576</file-size-threshold> <!-- 1 Mo -->
+		</multipart-config>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Product</servlet-name>
@@ -148,7 +154,7 @@
 		<servlet-name>RmUser</servlet-name>
 		<url-pattern>/rmUser.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>UpdateUser</servlet-name>
 		<servlet-class>controller.UpdateUserController</servlet-class>
@@ -157,7 +163,7 @@
 		<servlet-name>UpdateUser</servlet-name>
 		<url-pattern>/updateUser.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>UpdateCatalog</servlet-name>
 		<servlet-class>controller.UpdateCatalogController</servlet-class>
@@ -166,7 +172,7 @@
 		<servlet-name>UpdateCatalog</servlet-name>
 		<url-pattern>/updateCatalog.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>UpdateNews</servlet-name>
 		<servlet-class>controller.UpdateNewsController</servlet-class>

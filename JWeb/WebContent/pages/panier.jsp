@@ -73,7 +73,7 @@
 									%>
 									<tr>
 										<td><%= product.getName() %></td>
-										<td><img width="200px" alt="" src="http://g-ecx.images-amazon.com/images/G/02/uk/pcs/aplus/kitchen/JamieOliverAnniversaryFrypan._V355316657_.jpg"></td>
+										<td><img width="200px" alt="" src="<%= product.getPhoto() %>"></td>
 										<td><%= product.getDescription() %></td>
 										<td><%= nb%></td>
 										<td><%= nb * product.getPrice() %>€</td>

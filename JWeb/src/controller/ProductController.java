@@ -1,11 +1,16 @@
 package controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import model.Product;
 
@@ -20,48 +25,74 @@ public class ProductController extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		String name = request.getParameter("title");
-		String photo = request.getParameter("file");
 		String description = request.getParameter("description");
 		String priceString = request.getParameter("price");
-		System.out.println("name :" + name);
 		Float price = Float.valueOf(priceString);
 
-		// String fileName = request.getParameter("fileName");
-		// if(fileName == null || fileName.equals("")){
-		// throw new ServletException("File Name can't be null or empty");
-		// }
-		// File file = new
-		// File(request.getServletContext().getAttribute("FILES_DIR")+File.separator+fileName);
-		// if(!file.exists()){
-		// throw new ServletException("File doesn't exists on server.");
-		// }
-		// System.out.println("File location on server::"+file.getAbsolutePath());
-		// ServletContext ctx = getServletContext();
-		// InputStream fis = new FileInputStream(file);
-		// String mimeType = ctx.getMimeType(file.getAbsolutePath());
-		// response.setContentType(mimeType != null?
-		// mimeType:"application/octet-stream");
-		// response.setContentLength((int) file.length());
-		// response.setHeader("Content-Disposition", "attachment; filename=\"" +
-		// fileName + "\"");
-		//
-		// ServletOutputStream os = response.getOutputStream();
-		// byte[] bufferData = new byte[1024];
-		// int read=0;
-		// while((read = fis.read(bufferData))!= -1){
-		// os.write(bufferData, 0, read);
-		// }
-		// os.flush();
-		// os.close();
-		// fis.close();
-		// System.out.println("File downloaded at client successfully");
+		System.out.println("name :" + name);
+		
+		Part part = request.getPart("file");
 
-		System.out.println(photo);
+		String nomFichier = getNomFichier(part);
 
-		Product.createProduct(name, null, description, price);
+		System.out.println(nomFichier);
+		
+		if (nomFichier != null && !nomFichier.isEmpty()) {
+
+			nomFichier = nomFichier.substring(1, nomFichier.length() - 1);
+
+			System.out.println(nomFichier);
+			
+			String path = System.getProperty("user.dir");
+
+			path = path + "/git/JWeb/WebContent/img/product/";
+
+			ecrireFichier(part, nomFichier, path);
+		}
+		
+		String photoPath = "./img/product/" + nomFichier;
+
+		System.out.println(photoPath);
+		
+		Product.createProduct(name, photoPath, description, price);
 
 		request.setAttribute("success", "creation du produit reussi");
 		LoadController.LoadAdmin(request, response);
+	}
+
+	private static String getNomFichier( Part part ) {
+	    for ( String contentDisposition : part.getHeader( "content-disposition" ).split( ";" ) ) {
+	        if ( contentDisposition.trim().startsWith("filename") ) {
+	            return contentDisposition.substring( contentDisposition.indexOf( '=' ) + 1 );
+	        }
+	    }
+	    return null;
+	}
+	
+	private void ecrireFichier(Part part, String nomFichier, String chemin) throws IOException {
+
+		BufferedInputStream entree = null;
+		BufferedOutputStream sortie = null;
+		try {
+
+			entree = new BufferedInputStream(part.getInputStream(), 10240);
+			sortie = new BufferedOutputStream(new FileOutputStream(new File(chemin + nomFichier)), 10240);
+
+			byte[] tampon = new byte[10240];
+			int longueur;
+			while ((longueur = entree.read(tampon)) > 0) {
+				sortie.write(tampon, 0, longueur);
+			}
+		} finally {
+			try {
+				sortie.close();
+			} catch (IOException ignore) {
+			}
+			try {
+				entree.close();
+			} catch (IOException ignore) {
+			}
+		}
 	}
 
 	/**
@@ -76,7 +107,7 @@ public class ProductController extends HttpServlet {
 		Product product = Product.getProduct(id);
 
 		request.setAttribute("product", product);
-		
+
 		LoadController.LoadAdmin(request, response);
 	}
 
