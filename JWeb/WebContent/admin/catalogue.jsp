@@ -1,22 +1,26 @@
 <%@page import="model.*"%>
 <%@page import="java.util.ArrayList"%>
+
+<jsp:useBean id="shop" class="controller.LoadController" scope="session"/>
+<jsp:setProperty name="shop" property="*"/>
+
 <div class="Box right">
 	<center><h1>Catalogue</h1></center>
 	<table>
 		<thead>
 			<tr>
-				<td>Id</td>
-				<td>Titre</td>
-				<td><center>Produit</center></td>
-				<td><center>Description</center></td>
-				<td><center>Prix</center></td>
-				<td><center>Effacer</center></td>
+				<td><b>Id</b></td>
+				<td><b>Titre</b></td>
+				<td><b>Produit</b></td>
+				<td><b>Description</b></td>
+				<td><b>Prix</b></td>
+				<td><b>Effacer</b></td>
 			</tr>
 		</thead>
 		<tbody>
 			<form method="POST" action="updateCatalog.do">
 			<%
-				ArrayList<Product> listProduct = (ArrayList<Product>) request.getAttribute("listProduct");
+				ArrayList<Product> listProduct = shop.getListProduct();
 				if (listProduct != null)
 					for (Product product : listProduct) {
 						out.println("<tr><td>" + product.getId() + "</td>");

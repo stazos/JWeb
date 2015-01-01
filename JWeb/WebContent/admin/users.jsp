@@ -1,5 +1,9 @@
 <%@page import="model.*"%>
 <%@page import="java.util.ArrayList"%>
+
+<jsp:useBean id="shop" class="controller.LoadController" scope="session"/>
+<jsp:setProperty name="shop" property="*"/>
+
 <div class="Box left">
 	<center><h1>Liste des Utilisateurs</h1></center>
 	<table>
@@ -20,7 +24,7 @@
 			<form method="POST" action="updateUser.do">
 			<input type="submit" value="Modifier">
 			<%
-				ArrayList<User> listUser = (ArrayList<User>) request.getAttribute("listUser");
+				ArrayList<User> listUser = shop.getUsers();
 				if (listUser != null)
 					for (User user : listUser) {
 						out.println("<tr><td>" + user.getId() + "</td>");
