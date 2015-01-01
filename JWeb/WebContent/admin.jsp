@@ -22,10 +22,11 @@
 <body>
 	<%@ include file="pages/barTop.jsp"%>
 
-	<%@ include file="admin/news.jsp"%>
-	<%@ include file="admin/products.jsp"%>
-	<%@ include file="admin/listNews.jsp"%>
-	<%@ include file="admin/catalogue.jsp"%>	
-	<%@ include file="admin/users.jsp"%>
+	<jsp:include page="admin/news.jsp" />
+	<jsp:include page="admin/products.jsp" />
+	<jsp:include page="admin/listNews.jsp" />
+	<jsp:include page="admin/catalogue.jsp" />
+	<jsp:include page="admin/users.jsp" />
+
 </body>
 </html>

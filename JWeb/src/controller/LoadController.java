@@ -62,15 +62,19 @@ public class LoadController {
 		view.forward(request, response);
 	}
 	
-	static public void LoadProduct(HttpServletRequest request, HttpServletResponse response, String idString) throws IOException,
+	static public void LoadProduct(HttpServletRequest request, HttpServletResponse response, String idProduct) throws IOException,
 			ServletException {
 		
-		int id = Integer.valueOf(idString);
+		HttpSession session = request.getSession();
+		
+		int id = Integer.valueOf(idProduct);
 		Product product = Product.getProduct(id);
 		ArrayList<Reviews> listReviews = Reviews.getReviewsForProduct(id);
-
+		int inPanier = Panier.getNumberProductPanier((Integer)session.getAttribute("idUser"));
+		
 		request.setAttribute("Product", product);
 		request.setAttribute("ListReviews", listReviews);
+		request.setAttribute("inPanier", inPanier);
 		RequestDispatcher view = request.getRequestDispatcher("pages/product.jsp");
 		view.forward(request, response);
 	}

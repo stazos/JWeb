@@ -1,8 +1,12 @@
+<%
+	java.util.Date date = new java.util.Date();
+	Integer id = (Integer)session.getAttribute("idUser");
+	Boolean adm = (Boolean)session.getAttribute("admin");
+%>
 <div class="bar-top">
-	<h1>Luncher - Catalogue</h1>
+	<h1>Luncher - Catalogue - <%= date %></h1>
 	<%
-		Integer id = (Integer)session.getAttribute("idUser");
-		Boolean adm = (Boolean)session.getAttribute("admin");
+
     	if (id != null)
     	{
         	%>
