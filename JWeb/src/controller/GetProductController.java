@@ -16,5 +16,4 @@ public class GetProductController extends HttpServlet {
 		String idString = request.getParameter("id");
 		LoadController.LoadProduct(request, response, idString);
 	}
-
 }

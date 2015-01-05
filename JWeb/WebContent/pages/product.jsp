@@ -35,7 +35,6 @@
 					}
 			%>
 			</marquee>
-
 			<div class="page-container">
 				<%
 				Product product = shop.getProduct();

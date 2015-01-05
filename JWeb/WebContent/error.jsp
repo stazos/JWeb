@@ -20,9 +20,7 @@
 			<div class="page-container">
 				Une erreur est survenue, <a href="index.jsp">Retour à l'accueil</a>
 			</div>
-		    <hr>
-		<!--   <address><a href="mailto:Daniel.Scheider@tecfa.unige.ch">Daniel K. Schneider</a></address>-->
-			
+		    <hr>			
 		</div>
 	</center>
   </body>

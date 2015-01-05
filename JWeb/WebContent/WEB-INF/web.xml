@@ -28,15 +28,6 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>AllProduct</servlet-name>
-		<servlet-class>controller.AllProductController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AllProduct</servlet-name>
-		<url-pattern>/allProduct.do</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
 		<servlet-name>Connexion</servlet-name>
 		<servlet-class>controller.Connexion</servlet-class>
 	</servlet>
@@ -73,15 +64,6 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>GetUser</servlet-name>
-		<servlet-class>controller.GetUserController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>GetUser</servlet-name>
-		<url-pattern>/getUser.do</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
 		<servlet-name>Inscription</servlet-name>
 		<servlet-class>controller.Inscription</servlet-class>
 	</servlet>
@@ -98,7 +80,6 @@
 		<servlet-name>News</servlet-name>
 		<url-pattern>/news.do</url-pattern>
 	</servlet-mapping>
-
 
 	<servlet>
 		<servlet-name>Newsletter</servlet-name>
@@ -149,15 +130,6 @@
 	<servlet-mapping>
 		<servlet-name>RmPanier</servlet-name>
 		<url-pattern>/rmPanier.do</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>RmUser</servlet-name>
-		<servlet-class>controller.rmUserController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>RmUser</servlet-name>
-		<url-pattern>/rmUser.do</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

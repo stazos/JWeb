@@ -64,12 +64,8 @@ public class ProductController extends HttpServlet {
 		BufferedInputStream entree = null;
 		BufferedOutputStream sortie = null;
 		try {
-
 			entree = new BufferedInputStream(part.getInputStream(), 10240);
-			System.out.println(chemin + nomFichier);
-			sortie = new BufferedOutputStream(new FileOutputStream(new File(
-					chemin + nomFichier)), 10240);
-
+			sortie = new BufferedOutputStream(new FileOutputStream(new File(chemin + nomFichier)), 10240);
 			byte[] tampon = new byte[10240];
 			int longueur;
 			while ((longueur = entree.read(tampon)) > 0) {
@@ -87,22 +83,4 @@ public class ProductController extends HttpServlet {
 			}
 		}
 	}
-
-	/**
-	 * GET. Attend en params un "id" d'un produit retourne les informations de
-	 * ce produit.
-	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
-
-		String idString = request.getParameter("id");
-		int id = Integer.valueOf(idString);
-
-		Product product = Product.getProduct(id);
-
-		request.setAttribute("product", product);
-
-		LoadController.LoadAdmin(request, response);
-	}
-
 }

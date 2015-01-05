@@ -22,7 +22,6 @@ public class ReviewsController extends HttpServlet {
 
 		String idString = request.getParameter("idProduct");
 		String review = request.getParameter("review").replace("'", "''").replace("\"", "\\\"");
-		System.out.println(review);
 		int idProduct = Integer.valueOf(idString);
 
 		HttpSession session = request.getSession();

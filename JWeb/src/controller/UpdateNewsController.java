@@ -25,5 +25,4 @@ public class UpdateNewsController extends HttpServlet {
 		request.setAttribute("success", "mise a jour base de donné reussi");
 		LoadController.LoadAdmin(request, response);
 	}
-
 }

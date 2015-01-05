@@ -22,8 +22,6 @@ public class UpdateUserController extends HttpServlet {
 		User.userUnsetNewsletter();
 		User.userUnsetAdmin();
 		
-		System.out.println(listIdNewsletter);
-		
 		if (listIdNewsletter != null)
 			for (int i = 0; i < listIdNewsletter.length; i++) {
 				Integer id = Integer.valueOf(listIdNewsletter[i]);

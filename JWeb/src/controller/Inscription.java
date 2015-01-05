@@ -50,9 +50,6 @@ public class Inscription extends HttpServlet {
 				} else {
 					LoadController.LoadUser(request, response); 
 				}
-				// RequestDispatcher view =
-				// request.getRequestDispatcher("pages/welcome.jsp");
-				// view.forward(request, response);
 			} else {
 				request.setAttribute("error", "Erreur impossible de connecter l'utilisateur");
 				RequestDispatcher view = request.getRequestDispatcher("index.jsp");
@@ -63,21 +60,5 @@ public class Inscription extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("index.jsp");
 		    view.forward(request, response); 
 		}
-		// Use the below code to debug the program if you get problems
-		// response.setContentType("text/html"):
-		// PrintWriter out = response.getWriter();
-		// out.println("Coffee Selection Advise<br>");
-
-		// Iterator it = result.iterator();
-		// while(it.hasNext()) {
-		// out.print("<br>try: " + it.next());
-		// }
-
-		// The results will be passed back (as an attribute) to the JSP view
-		// The attribute will be a name/value pair, the value in this case will
-		// be a List object
-		// request.setAttribute("styles", result);
-		// RequestDispatcher view = request.getRequestDispatcher("result.jsp");
-		// view.forward(request, response);
 	}
 }

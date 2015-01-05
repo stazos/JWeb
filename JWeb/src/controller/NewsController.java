@@ -1,10 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,14 +31,4 @@ public class NewsController extends HttpServlet {
 		}
 		LoadController.LoadAdmin(request, response);
 	}
-
-	/**
-	 * GET.
-	 * N'attend rien params.
-	 * return toute les news.
-	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		ArrayList<News> listNews = News.getNews();	
-	}
-
 }

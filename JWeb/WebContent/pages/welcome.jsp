@@ -14,7 +14,6 @@
 </head>
 <body class="bg">
 	<%@ include file="barTop.jsp"%>
-
 	<center>
 		<div class="page-body">
 			<div class="page-header">
@@ -32,7 +31,6 @@
 					}
 			%>
 			</marquee>
-
 			<div class="page-container">
 				<div class="table">
 				<%

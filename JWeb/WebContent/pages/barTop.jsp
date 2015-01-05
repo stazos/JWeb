@@ -3,6 +3,7 @@
 	Integer id = (Integer)session.getAttribute("idUser");
 	Boolean adm = (Boolean)session.getAttribute("admin");
 %>
+
 <jsp:useBean id="shop" class="controller.LoadController" scope="session"/>
 <jsp:setProperty name="shop" property="*"/>
 
@@ -18,14 +19,12 @@
         			if (adm != true)
         			{
 	        		%>
-       					
 		        		<form style="display: inline-block;" method="POST" action="getAllProduct.do">
         					<input type="Submit" class="regular" value="Le Catalogue">
         				</form>
         				<form style="display: inline-block;" method="GET" action="panier.do">
         					<input type="Submit" class="regular" value="Mon Panier(<%= shop.getNbPanier()%>)">
         				</form>
-        				
         			<%
         			}
         		%>

@@ -25,5 +25,4 @@ public class UpdateCatalogController extends HttpServlet {
 		request.setAttribute("success", "Article supprimé");
 		LoadController.LoadAdmin(request, response);
 	}
-
 }

@@ -63,13 +63,15 @@
 					</thead>
 					<tbody>
 						<%
+						float total = 0;
 						if (panier != null)
 							for (Product product : panier)
 							{
 								if (!display.contains(product.getId()))
 								{
 									display.add(product.getId());
-									int nb = Collections.frequency(list, product.getId());
+									float nb = Collections.frequency(list, product.getId());
+									total = total + (nb * product.getPrice());
 									%>
 									<tr>
 										<td><%= product.getName() %></td>
@@ -82,6 +84,13 @@
 								}
 							}
 						%>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>Total</td>
+							<td><%= total %></td>
+							</tr>
 					</tbody>
 				</table>
 				<input type="submit" value="Tout Supprimer">

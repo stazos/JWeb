@@ -15,5 +15,4 @@ public class GetAllProductController extends HttpServlet {
 		
 		LoadController.LoadUser(request, response);
 	}
-
 }
