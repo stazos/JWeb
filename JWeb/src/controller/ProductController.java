@@ -39,7 +39,7 @@ public class ProductController extends HttpServlet {
 
 			System.out.println(nomFichier);
 			
-			String path = System.getProperty("user.dir");
+			String path = System.getProperty("user.home");
 			System.out.println(path);
 			path = path + "/git/JWeb/JWeb/WebContent/img/product/";
 
