@@ -35,11 +35,4 @@
 			</form>
 		</tbody>
 	</table>
-	<div class="success">
-		<% 
-			String successRmProduct = (String)request.getAttribute("successRmProduct");
-			if (successRmProduct != null)
-				out.print(successRmProduct);
-		%>
-	</div>
 </div>
