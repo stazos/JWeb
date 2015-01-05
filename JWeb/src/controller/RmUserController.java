@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,10 +23,5 @@ public class RmUserController extends HttpServlet {
 		int id = Integer.valueOf(idString);
 
 		User.userDelete(id);
-
-		response.setStatus(200);
-		PrintWriter out = response.getWriter();
-		out.print("SUCCESS");
-		out.flush();
 	}
 }

@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +21,7 @@ public class ReviewsController extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		String idString = request.getParameter("idProduct");
-		String review = request.getParameter("review");
+		String review = request.getParameter("review").replace("'", "''");
 
 		int idProduct = Integer.valueOf(idString);
 
@@ -32,23 +30,5 @@ public class ReviewsController extends HttpServlet {
 
 		Reviews.createReview(idProduct, idUser, review);
 		LoadController.LoadProduct(request, response, idString);
-//		response.setStatus(200);
-//		PrintWriter out = response.getWriter();
-//		out.print("SUCCESS");
-//		out.flush();
 	}
-
-	/**
-	 * GET.
-	 * Attend en params un "id" d'un produit.
-	 * retourne les reviews lier a ce produit.
-	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
-		String idString = request.getParameter("id");
-		int idProduct = Integer.valueOf(idString);
-		
-		ArrayList<Reviews> listReviews = Reviews.getReviewsForProduct(idProduct);
-	}
-
 }

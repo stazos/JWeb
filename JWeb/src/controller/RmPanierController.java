@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,9 +30,5 @@ public class RmPanierController extends HttpServlet {
 			Panier.rmAllProductPanier(idUser);
 		}
 		LoadController.LoadShop(request, response);
-//		response.setStatus(200);
-//		PrintWriter out = response.getWriter();
-//		out.print("SUCCESS");
-//		out.flush();
 	}
 }

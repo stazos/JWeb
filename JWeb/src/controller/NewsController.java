@@ -23,9 +23,8 @@ public class NewsController extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-		String title = request.getParameter("title");
-		String description = request.getParameter("description");
-		
+		String title = request.getParameter("title").replace("'", "''");
+		String description = request.getParameter("description").replace("'", "''");
 		
 		News.createNews(title, description);
 		request.setAttribute("success", "creation de la news reussi");
@@ -38,8 +37,7 @@ public class NewsController extends HttpServlet {
 	 * return toute les news.
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		ArrayList<News> listNews = News.getNews();
-		
+		ArrayList<News> listNews = News.getNews();	
 	}
 
 }

@@ -24,15 +24,11 @@ public class ProductController extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-		String name = request.getParameter("title");
-		String description = request.getParameter("description");
+		String name = request.getParameter("title").replace("'", "''");
+		String description = request.getParameter("description").replace("'", "''");
 		String priceString = request.getParameter("price");
 		Float price = Float.valueOf(priceString);
-
-		System.out.println("name :" + name);
-		
 		Part part = request.getPart("file");
-
 		String nomFichier = getNomFichier(part);
 
 		System.out.println(nomFichier);
@@ -44,7 +40,7 @@ public class ProductController extends HttpServlet {
 			System.out.println(nomFichier);
 			
 			String path = System.getProperty("user.dir");
-
+			System.out.println(path);
 			path = path + "/git/JWeb/JWeb/WebContent/img/product/";
 
 			ecrireFichier(part, nomFichier, path);
@@ -76,8 +72,9 @@ public class ProductController extends HttpServlet {
 		try {
 
 			entree = new BufferedInputStream(part.getInputStream(), 10240);
+			System.out.println(chemin + nomFichier);
 			sortie = new BufferedOutputStream(new FileOutputStream(new File(chemin + nomFichier)), 10240);
-
+			
 			byte[] tampon = new byte[10240];
 			int longueur;
 			while ((longueur = entree.read(tampon)) > 0) {
