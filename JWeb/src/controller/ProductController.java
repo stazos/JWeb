@@ -22,50 +22,44 @@ public class ProductController extends HttpServlet {
 	 * POST. Attend en params un "name", une "photo", une "description", un
 	 * float "price". créer un produit.
 	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 
 		String name = request.getParameter("title").replace("'", "''");
 		String description = request.getParameter("description").replace("'", "''");
 		String priceString = request.getParameter("price");
+		if (priceString.equals(""))
+			priceString = "0";
 		Float price = Float.valueOf(priceString);
 		Part part = request.getPart("file");
 		String nomFichier = getNomFichier(part);
-
-		System.out.println(nomFichier);
 		
-		if (nomFichier != null && !nomFichier.isEmpty()) {
-
+		if (!name.equals("") && !description.equals("") && !priceString.equals("") && nomFichier != null && !nomFichier.equals("\"\"") && !nomFichier.isEmpty()) {
 			nomFichier = nomFichier.substring(1, nomFichier.length() - 1);
-
-			System.out.println(nomFichier);
-			
 			String path = System.getProperty("user.home");
-			System.out.println(path);
 			path = path + "/git/JWeb/JWeb/WebContent/img/product/";
-
 			ecrireFichier(part, nomFichier, path);
-		}
-		
-		String photoPath = "./img/product/" + nomFichier;
-
-		System.out.println(photoPath);
-		
-		Product.createProduct(name, photoPath, description, price);
-
-		request.setAttribute("success", "creation du produit reussi");
+			String photoPath = "./img/product/" + nomFichier;
+			Product.createProduct(name, photoPath, description, price);
+			request.setAttribute("success", "creation du produit reussi");
+		} else
+			request.setAttribute("error", "probleme lors de la mise en ligne du produit");
 		LoadController.LoadAdmin(request, response);
 	}
 
-	private static String getNomFichier( Part part ) {
-	    for ( String contentDisposition : part.getHeader( "content-disposition" ).split( ";" ) ) {
-	        if ( contentDisposition.trim().startsWith("filename") ) {
-	            return contentDisposition.substring( contentDisposition.indexOf( '=' ) + 1 );
-	        }
-	    }
-	    return null;
+	private static String getNomFichier(Part part) {
+		for (String contentDisposition : part.getHeader("content-disposition")
+				.split(";")) {
+			if (contentDisposition.trim().startsWith("filename")) {
+				return contentDisposition.substring(contentDisposition
+						.indexOf('=') + 1);
+			}
+		}
+		return null;
 	}
-	
-	private void ecrireFichier(Part part, String nomFichier, String chemin) throws IOException {
+
+	private void ecrireFichier(Part part, String nomFichier, String chemin)
+			throws IOException {
 
 		BufferedInputStream entree = null;
 		BufferedOutputStream sortie = null;
@@ -73,17 +67,19 @@ public class ProductController extends HttpServlet {
 
 			entree = new BufferedInputStream(part.getInputStream(), 10240);
 			System.out.println(chemin + nomFichier);
-			sortie = new BufferedOutputStream(new FileOutputStream(new File(chemin + nomFichier)), 10240);
-			
+			sortie = new BufferedOutputStream(new FileOutputStream(new File(
+					chemin + nomFichier)), 10240);
+
 			byte[] tampon = new byte[10240];
 			int longueur;
 			while ((longueur = entree.read(tampon)) > 0) {
 				sortie.write(tampon, 0, longueur);
 			}
+		} catch (IOException ignore) {
 		} finally {
 			try {
 				sortie.close();
-			} catch (IOException ignore) {
+			} catch (Exception ignore) {
 			}
 			try {
 				entree.close();
@@ -96,7 +92,8 @@ public class ProductController extends HttpServlet {
 	 * GET. Attend en params un "id" d'un produit retourne les informations de
 	 * ce produit.
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 
 		String idString = request.getParameter("id");
 		int id = Integer.valueOf(idString);

@@ -21,8 +21,8 @@ public class ReviewsController extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		String idString = request.getParameter("idProduct");
-		String review = request.getParameter("review").replace("'", "''");
-
+		String review = request.getParameter("review").replace("'", "''").replace("\"", "\\\"");
+		System.out.println(review);
 		int idProduct = Integer.valueOf(idString);
 
 		HttpSession session = request.getSession();

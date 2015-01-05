@@ -26,8 +26,13 @@ public class NewsController extends HttpServlet {
 		String title = request.getParameter("title").replace("'", "''");
 		String description = request.getParameter("description").replace("'", "''");
 		
-		News.createNews(title, description);
-		request.setAttribute("success", "creation de la news reussi");
+		if (!title.equals("") && !description.equals("")) {
+			News.createNews(title, description);
+			request.setAttribute("success", "creation de la news reussi");
+		}
+		else {
+			request.setAttribute("error", "Echec de l'ajout de la news");
+		}
 		LoadController.LoadAdmin(request, response);
 	}
 
