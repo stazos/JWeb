@@ -21,7 +21,7 @@
 			</thead>
 			<tbody>
 				<%
-					ArrayList<News> listNews = shop.getNews();
+					ArrayList<News> listNews = (ArrayList<News>) request.getAttribute("news");
 					if (listNews != null)
 						for (News news : listNews) {
 							out.println("<tr><td>" + news.getId() + "</td>");

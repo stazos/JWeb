@@ -25,7 +25,7 @@
 			</div>
 			<marquee id="newsContainer" class="defileParent" onmouseover="this.stop()" onmouseout="this.start()" direction="left" scrollamount="5">
 			<%
-				ArrayList<News> listNews = shop.getNews();
+				ArrayList<News> listNews = (ArrayList<News>) request.getAttribute("news");
 				if (listNews != null)
 					for (News news : listNews)
 					{

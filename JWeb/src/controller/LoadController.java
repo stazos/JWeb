@@ -17,7 +17,6 @@ import model.User;
 
 public class LoadController {
 	
-	static private ArrayList<News> ListNews;
 	static private ArrayList<Product> ListProducts;
 	static private ArrayList<User> ListUsers;
 	static private ArrayList<Reviews> ListReviews;
@@ -26,9 +25,6 @@ public class LoadController {
 	static private int Nb;
 
 
-	public ArrayList<News> getNews() {
-		return ListNews;
-	}
 	public ArrayList<Product> getListProduct() {
 		return ListProducts;
 	}
@@ -52,7 +48,7 @@ public class LoadController {
 	static public void LoadAdmin(HttpServletRequest request, HttpServletResponse response) throws IOException,
 			ServletException {
 
-		ListNews = News.getNews();
+		request.setAttribute("news", News.getNews());
 		ListProducts = Product.getAllProduct();
 		ListUsers = User.getUser();
 
@@ -65,7 +61,7 @@ public class LoadController {
 
 		HttpSession session = request.getSession();
 
-		ListNews = News.getNews();
+		request.setAttribute("news", News.getNews());
 		ListProducts = Product.getAllProduct();		
 		Nb = Panier.getNumberProductPanier((Integer)session.getAttribute("idUser"));
 		
