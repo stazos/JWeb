@@ -1,13 +1,12 @@
 package model;
 
-import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.sql.Date;
+import java.util.HashMap;
 
-import utility.DbUtility;
+import orm.OrmRequest;
 
 public class News {
 
@@ -19,7 +18,7 @@ public class News {
 	public String getId() {
 		return id;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
@@ -39,53 +38,57 @@ public class News {
 		this.date = date;
 	}
 
+	/**
+	 * valid
+	 * 
+	 * @param title
+	 * @param description
+	 */
 	static public void createNews(String title, String description) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		try {
-			String req = "INSERT INTO news VALUES (null, '" + title + "', '" + description + "', NOW());";
-			System.out.println(req);
-			int statut = statement.executeUpdate(req);
-			System.out.println("statut -> " + statut);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
+		OrmRequest request = new OrmRequest();
+		request.InsertInto("news", "null", title.toCharArray(), description.toCharArray(), "NOW()");
+		int statut = request.ExecuteUpdate();
+		System.out.println("statut -> " + statut);
 	}
 
+	/**
+	 * valid
+	 * 
+	 * @return
+	 */
 	static public ArrayList<News> getNews() {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
+		OrmRequest request = new OrmRequest();
+		request.Select("id", "title", "description", "date");
+		request.From("news");
+		ResultSet resultat = request.ExecuteQuery();
+
 		ArrayList<News> listNews = new ArrayList<News>();
-		try {
-			String req = "SELECT id, title, description, date FROM news;";
-			System.out.println(req);
-			ResultSet resultat = statement.executeQuery(req);
-			System.out.println(resultat);
-			while (resultat.next()) {
-				listNews.add(new News(resultat.getString("id"), resultat.getString("title"), resultat.getString("description"), resultat.getDate("date")));
+		if (resultat != null) {
+			try {
+				while (resultat.next()) {
+					listNews.add(new News(resultat.getString("id"), resultat.getString("title"), resultat
+							.getString("description"), resultat.getDate("date")));
+
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
 		}
 		return listNews;
 	}
-	
+
+	/**
+	 * valid
+	 * 
+	 * @param id
+	 */
 	static public void newsDelete(int id) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		try {
-			String req = "DELETE FROM news WHERE id = " + id + ";";
-			System.out.println(req);
-			int statut = statement.executeUpdate(req);
-			System.out.println("statut -> " + statut);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
+		OrmRequest request = new OrmRequest();
+		request.DeleteFrom("news");
+		HashMap<String, Object> whereMap = new HashMap<String, Object>();
+		whereMap.put("id", id);
+		request.Where(whereMap);
+		int statut = request.ExecuteUpdate();
+		System.out.println("statut -> " + statut);
 	}
 }

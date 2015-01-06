@@ -1,97 +1,96 @@
 package model;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import utility.DbUtility;
+import orm.OrmRequest;
 
 public class Panier {
 
+	/**
+	 * valid
+	 * 
+	 * @param idUser
+	 * @param idProduct
+	 */
 	static public void createPanier(int idUser, int idProduct) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		try {
-			String req = "INSERT INTO panier VALUES (null, " + idUser + ", " + idProduct + ");";
-			System.out.println(req);
-			int statut = statement.executeUpdate(req);
-			System.out.println("statut -> " + statut);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
+		OrmRequest request = new OrmRequest();
+		request.InsertInto("panier", "null", idUser, idProduct);
+		int statut = request.ExecuteUpdate();
+		System.out.println("statut -> " + statut);
 	}
 
+	/**
+	 * valid
+	 * 
+	 * @param idUser
+	 * @return
+	 */
 	static public ArrayList<Product> getProductPanier(int idUser) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
+		OrmRequest request = new OrmRequest();
+		request.Select("product.id", "product.name", "product.photo", "product.description", "product.price");
+		request.From("product", "panier");
+		HashMap<String, Object> whereMap = new HashMap<String, Object>();
+		whereMap.put("product.id", "panier.idProduct".toCharArray());
+		whereMap.put("panier.idUser", idUser);
+		request.Where(whereMap);
+		ResultSet resultat = request.ExecuteQuery();
+
 		ArrayList<Product> listProduct = new ArrayList<Product>();
-		try {
-			String req = "SELECT product.id, product.name, product.photo, product.description, product.price "
-					+ "FROM product, panier WHERE product.id = panier.idProduct AND panier.idUser = " + idUser + ";";
-			System.out.println(req);
-			ResultSet resultat = statement.executeQuery(req);
-			while (resultat.next()) {
-				listProduct.add(new Product(resultat.getInt("id"), resultat.getString("name"), resultat
-						.getString("photo"), resultat.getString("description"), resultat.getFloat("price")));
+		if (resultat != null) {
+			try {
+				while (resultat.next()) {
+					listProduct.add(new Product(resultat.getInt("id"), resultat.getString("name"), resultat
+							.getString("photo"), resultat.getString("description"), resultat.getFloat("price")));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
 		}
 		return listProduct;
 	}
-	
+
+	/**
+	 * valid
+	 * 
+	 * @param idUser
+	 * @return
+	 */
 	static public int getNumberProductPanier(int idUser) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
+		OrmRequest request = new OrmRequest();
+		request.Select("COUNT(*) as total");
+		request.From("panier");
+		HashMap<String, Object> whereMap = new HashMap<String, Object>();
+		whereMap.put("idUser", idUser);
+		request.Where(whereMap);
+		ResultSet resultat = request.ExecuteQuery();
+
 		int nb = 0;
-		try {
-			String req = "SELECT COUNT(*) as total FROM panier WHERE idUser = " + idUser + ";";
-			System.out.println(req);
-			ResultSet resultat = statement.executeQuery(req);
-			resultat.next();
-			nb = resultat.getInt("total");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
+		if (resultat != null) {
+			try {
+				resultat.next();
+				nb = resultat.getInt("total");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return nb;
 	}
 
-	static public void rmProductPanier(int idUser, int idProduct) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		try {
-			String req = "DELETE FROM panier WHERE idUser = " + idUser + " AND idProduct = " + idProduct + ";";
-			System.out.println(req);
-			int statut = statement.executeUpdate(req);
-			System.out.println("statut -> " + statut);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
-	}
-
+	/**
+	 * valid
+	 * @param idUser
+	 */
 	static public void rmAllProductPanier(int idUser) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		try {
-			String req = "DELETE FROM panier WHERE idUser = " + idUser + ";";
-			System.out.println(req);
-			int statut = statement.executeUpdate(req);
-			System.out.println("statut -> " + statut);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
+		OrmRequest request = new OrmRequest();
+		request.DeleteFrom("panier");
+		HashMap<String, Object> whereMap = new HashMap<String, Object>();
+		whereMap.put("idUser", idUser);
+		request.Where(whereMap);
+		int statut = request.ExecuteUpdate();
+		System.out.println("statut -> " + statut);
 	}
 
 }

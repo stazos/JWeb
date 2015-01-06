@@ -1,12 +1,11 @@
 package model;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import utility.DbUtility;
+import orm.OrmRequest;
 
 public class User {
 
@@ -50,186 +49,213 @@ public class User {
 		this.admin = admin;
 	}
 
+	/**
+	 * valid
+	 * 
+	 * @param firstname
+	 * @param lastname
+	 * @param email
+	 * @param password
+	 * @param newsletter
+	 */
 	static public void createUser(String firstname, String lastname, String email, String password, String newsletter) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		try {
-			String req = "INSERT INTO user VALUES (null, '" + firstname + "', '" + lastname + "', '" + email
-					+ "', MD5('" + password + "'), " + newsletter + ", false , NOW());";
-			System.out.println(req);
-			int statut = statement.executeUpdate(req);
-			System.out.println("statut -> " + statut);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
+		OrmRequest request = new OrmRequest();
+		request.InsertInto("user", "null", firstname.toCharArray(), lastname.toCharArray(), email.toCharArray(),
+				"MD5(\"" + password + "\")", newsletter, "false", "NOW()");
+		int statut = request.ExecuteUpdate();
+		System.out.println("statut -> " + statut);
 	}
 
+	/**
+	 * valid
+	 * 
+	 * @param email
+	 * @return
+	 */
 	static public boolean checkUserMail(String email) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
+		OrmRequest request = new OrmRequest();
+		request.Select("email");
+		request.From("user");
+		HashMap<String, Object> whereMap = new HashMap<String, Object>();
+		whereMap.put("email", email);
+		request.Where(whereMap);
+		ResultSet resultat = request.ExecuteQuery();
+
 		boolean result = false;
-		try {
-			String req = "SELECT email FROM user WHERE email = '" + email + "';";
-			System.out.println(req);
-			ResultSet resultat = statement.executeQuery(req);
-			System.out.println(resultat);
-			int rowcount = 0;
-			if (resultat.last()) {
-				rowcount = resultat.getRow();
+		if (resultat != null) {
+			try {
+				int rowcount = 0;
+				if (resultat.last()) {
+					rowcount = resultat.getRow();
+				}
+				if (rowcount == 0) {
+					result = true;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			if (rowcount == 0) {
-				result = true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
 		}
 		return result;
 	}
 
+	/**
+	 * valid
+	 * 
+	 * @param email
+	 * @param password
+	 * @return
+	 */
 	static public int connectUser(String email, String password) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
+		OrmRequest request = new OrmRequest();
+		request.Select("id");
+		request.From("user");
+		HashMap<String, Object> whereMap = new HashMap<String, Object>();
+		whereMap.put("email", email);
+		String md5 = "MD5(\"" + password + "\")";
+		whereMap.put("password", md5.toCharArray());
+		request.Where(whereMap);
+		ResultSet resultat = request.ExecuteQuery();
+
 		int id = -1;
-		try {
-			String req = "SELECT id FROM user WHERE email = '" + email + "' AND password = MD5('" + password + "');";
-			System.out.println(req);
-			ResultSet resultat = statement.executeQuery(req);
-			System.out.println(resultat);
-			resultat.next();
-			if (resultat.isFirst() == true) {
-				id = resultat.getInt("id");
-				System.out.println(id);
+		if (resultat != null) {
+			try {
+				resultat.next();
+				if (resultat.isFirst() == true) {
+					id = resultat.getInt("id");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
 		}
 		return id;
 	}
-	
+
+	/**
+	 * valid
+	 * 
+	 * @param id
+	 * @return
+	 */
 	static public Boolean userIsAdmin(int id) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
+		OrmRequest request = new OrmRequest();
+		request.Select("admin");
+		request.From("user");
+		HashMap<String, Object> whereMap = new HashMap<String, Object>();
+		whereMap.put("id", id);
+		request.Where(whereMap);
+		ResultSet resultat = request.ExecuteQuery();
+
 		Boolean result = false;
-		try {
-			String req = "SELECT admin FROM user WHERE id = " + id + ";";
-			System.out.println(req);
-			ResultSet resultat = statement.executeQuery(req);
-			System.out.println(resultat);
-			resultat.next();
-			if (resultat.isFirst() == true) {
-				if (resultat.getBoolean("admin") == true) {
-					result = true;
+		if (resultat != null) {
+			try {
+				resultat.next();
+				if (resultat.isFirst() == true) {
+					if (resultat.getBoolean("admin") == true) {
+						result = true;
+					}
 				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
 		}
 		return result;
 	}
 
+	/**
+	 * valid
+	 * 
+	 * @return
+	 */
 	static public ArrayList<User> getUser() {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
+		OrmRequest request = new OrmRequest();
+		request.Select("id", "firstname", "lastname", "email", "newsletter", "admin", "date_inscription");
+		request.From("user");
+		ResultSet resultat = request.ExecuteQuery();
+
 		ArrayList<User> listUser = new ArrayList<User>();
-		try {
-			String req = "SELECT id, firstname, lastname, email, newsletter, admin, date_inscription FROM user";
-			System.out.println(req);
-			ResultSet resultat = statement.executeQuery(req);
-			System.out.println(resultat);
-			while (resultat.next()) {
-				listUser.add(new User(resultat.getInt("id"), resultat.getString("firstname"), resultat
-						.getString("lastname"), resultat.getString("email"), resultat.getBoolean("newsletter"),
-						resultat.getBoolean("admin")));
+		if (resultat != null) {
+			try {
+				while (resultat.next()) {
+					listUser.add(new User(resultat.getInt("id"), resultat.getString("firstname"), resultat
+							.getString("lastname"), resultat.getString("email"), resultat.getBoolean("newsletter"),
+							resultat.getBoolean("admin")));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
 		}
 		return listUser;
 	}
 
+	/**
+	 * valid
+	 * 
+	 * @param id
+	 */
 	static public void userSetAdmin(int id) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		try {
-			String req = "UPDATE user SET admin = true WHERE id = " + id + ";";
-			System.out.println(req);
-			int statut = statement.executeUpdate(req);
-			System.out.println("statut -> " + statut);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
+		OrmRequest request = new OrmRequest();
+		request.Update("user", "admin", "true");
+		HashMap<String, Object> whereMap = new HashMap<String, Object>();
+		whereMap.put("id", id);
+		request.Where(whereMap);
+		int statut = request.ExecuteUpdate();
+		System.out.println("statut -> " + statut);
 	}
 
+	/**
+	 * valid
+	 * 
+	 * @param id
+	 */
 	static public void userSetNewsletter(int id) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		try {
-			String req = "UPDATE user SET newsletter = true WHERE id = " + id + ";";
-			System.out.println(req);
-			int statut = statement.executeUpdate(req);
-			System.out.println("statut -> " + statut);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
+		OrmRequest request = new OrmRequest();
+		request.Update("user", "newsletter", "true");
+		HashMap<String, Object> whereMap = new HashMap<String, Object>();
+		whereMap.put("id", id);
+		request.Where(whereMap);
+		int statut = request.ExecuteUpdate();
+		System.out.println("statut -> " + statut);
 	}
 
+	/**
+	 * valid
+	 * 
+	 * @param id
+	 */
 	static public void userDelete(int id) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		try {
-			String req = "DELETE FROM user WHERE id = " + id + ";";
-			System.out.println(req);
-			int statut = statement.executeUpdate(req);
-			System.out.println("statut -> " + statut);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
+		OrmRequest request = new OrmRequest();
+		request.DeleteFrom("user");
+		HashMap<String, Object> whereMap = new HashMap<String, Object>();
+		whereMap.put("id", id);
+		request.Where(whereMap);
+		int statut = request.ExecuteUpdate();
+		System.out.println("statut -> " + statut);
 	}
 
+	/**
+	 * valid
+	 */
 	static public void userUnsetNewsletter() {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		try {
-			String req = "UPDATE user SET newsletter = false WHERE newsletter = true;";
-			System.out.println(req);
-			int statut = statement.executeUpdate(req);
-			System.out.println("statut -> " + statut);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
+		OrmRequest request = new OrmRequest();
+		request.Update("user", "newsletter", "false");
+		HashMap<String, Object> whereMap = new HashMap<String, Object>();
+		whereMap.put("newsletter", "true".toCharArray());
+		request.Where(whereMap);
+		int statut = request.ExecuteUpdate();
+		System.out.println("statut -> " + statut);
 	}
-	
+
+	/**
+	 * valid
+	 */
 	static public void userUnsetAdmin() {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		try {
-			String req = "UPDATE user SET admin = false WHERE admin = true;";
-			System.out.println(req);
-			int statut = statement.executeUpdate(req);
-			System.out.println("statut -> " + statut);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
+		OrmRequest request = new OrmRequest();
+		request.Update("user", "admin", "false");
+		HashMap<String, Object> whereMap = new HashMap<String, Object>();
+		whereMap.put("admin", "true".toCharArray());
+		request.Where(whereMap);
+		int statut = request.ExecuteUpdate();
+		System.out.println("statut -> " + statut);
 	}
 
 }

@@ -1,12 +1,11 @@
 package model;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import utility.DbUtility;
+import orm.OrmRequest;
 
 public class Product {
 
@@ -44,77 +43,87 @@ public class Product {
 		this.price = price;
 	}
 
+	/**
+	 * valid
+	 * 
+	 * @param name
+	 * @param photo
+	 * @param description
+	 * @param price
+	 */
 	static public void createProduct(String name, String photo, String description, Float price) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		try {
-			String req = "INSERT INTO product VALUES (null, '" + name + "', '" + photo + "', '" + description + "', "
-					+ price + ");";
-			System.out.println(req);
-			int statut = statement.executeUpdate(req);
-			System.out.println("statut -> " + statut);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
+		OrmRequest request = new OrmRequest();
+		request.InsertInto("product", "null", name.toCharArray(), photo.toCharArray(), description.toCharArray(), price);
+		int statut = request.ExecuteUpdate();
+		System.out.println("statut -> " + statut);
 	}
 
+	/**
+	 * valid
+	 * 
+	 * @return
+	 */
 	static public ArrayList<Product> getAllProduct() {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
+		OrmRequest request = new OrmRequest();
+		request.Select("id", "name", "photo", "description", "price");
+		request.From("product");
+		ResultSet resultat = request.ExecuteQuery();
+
 		ArrayList<Product> listProduct = new ArrayList<Product>();
-		try {
-			String req = "SELECT id, name, photo, description, price FROM product;";
-			System.out.println(req);
-			ResultSet resultat = statement.executeQuery(req);
-			System.out.println(resultat);
-			while (resultat.next()) {
-				listProduct.add(new Product(resultat.getInt("id"), resultat.getString("name"), resultat
-						.getString("photo"), resultat.getString("description"), resultat.getFloat("price")));
+		if (resultat != null) {
+			try {
+				while (resultat.next()) {
+					listProduct.add(new Product(resultat.getInt("id"), resultat.getString("name"), resultat
+							.getString("photo"), resultat.getString("description"), resultat.getFloat("price")));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
 		}
 		return listProduct;
 	}
 
+	/**
+	 * valid
+	 * 
+	 * @param id
+	 * @return
+	 */
 	static public Product getProduct(int id) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
+		OrmRequest request = new OrmRequest();
+		request.Select("name", "photo", "description", "price");
+		request.From("product");
+		HashMap<String, Object> whereMap = new HashMap<String, Object>();
+		whereMap.put("id", id);
+		request.Where(whereMap);
+		ResultSet resultat = request.ExecuteQuery();
 		Product product = null;
-		try {
-			String req = "SELECT name, photo, description, price FROM product WHERE id = " + id + ";";
-			System.out.println(req);
-			ResultSet resultat = statement.executeQuery(req);
-			System.out.println(resultat);
-			resultat.next();
-			if (resultat.isFirst() == true) {
-				product = new Product(id, resultat.getString("name"), resultat.getString("photo"),
-						resultat.getString("description"), resultat.getFloat("price"));
+		if (resultat != null) {
+			try {
+				resultat.next();
+				if (resultat.isFirst() == true) {
+					product = new Product(id, resultat.getString("name"), resultat.getString("photo"),
+							resultat.getString("description"), resultat.getFloat("price"));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
 		}
 		return product;
 	}
-	
+
+	/**
+	 * valid
+	 * 
+	 * @param id
+	 */
 	static public void productDelete(int id) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		try {
-			String req = "DELETE FROM product WHERE id = " + id + ";";
-			System.out.println(req);
-			int statut = statement.executeUpdate(req);
-			System.out.println("statut -> " + statut);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
+		OrmRequest request = new OrmRequest();
+		request.DeleteFrom("product");
+		HashMap<String, Object> whereMap = new HashMap<String, Object>();
+		whereMap.put("id", id);
+		request.Where(whereMap);
+		int statut = request.ExecuteUpdate();
+		System.out.println("statut -> " + statut);
 	}
 }

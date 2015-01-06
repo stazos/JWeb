@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="utility.DbUtility"%>
 <%
-	try {
-		Class.forName("com.mysql.jdbc.Driver");
-	} catch (ClassNotFoundException e) {
-		System.out.println(e.getMessage());
-	}
 	//DbUtility.synDB();
 	session.setAttribute("idUser", null);
 	session.setAttribute("admin", false);

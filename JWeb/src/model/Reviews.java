@@ -1,12 +1,11 @@
 package model;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import utility.DbUtility;
+import orm.OrmRequest;
 
 public class Reviews {
 
@@ -32,38 +31,46 @@ public class Reviews {
 		this.userName = userName;
 	}
 
+	/**
+	 * valid
+	 * 
+	 * @param idProduct
+	 * @param idUser
+	 * @param review
+	 */
 	static public void createReview(int idProduct, int idUser, String review) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
-		try {
-			String req = "INSERT INTO reviews VALUES (null, " + idProduct + ", " + idUser + ", \"" + review + "\");";
-			System.out.println(req);
-			int statut = statement.executeUpdate(req);
-			System.out.println("statut -> " + statut);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
-		}
+		OrmRequest request = new OrmRequest();
+		request.InsertInto("reviews", "null", idProduct, idUser, review.toCharArray());
+		int statut = request.ExecuteUpdate();
+		System.out.println("statut -> " + statut);
 	}
 
+	/**
+	 * valid
+	 * 
+	 * @param idProduct
+	 * @return
+	 */
 	static public ArrayList<Reviews> getReviewsForProduct(int idProduct) {
-		Connection connexion = DbUtility.connectToDB();
-		Statement statement = DbUtility.getConnectStatement(connexion);
+		OrmRequest request = new OrmRequest();
+		request.Select("reviews.id", "reviews.review", "user.firstname");
+		request.From("reviews", "user");
+		HashMap<String, Object> whereMap = new HashMap<String, Object>();
+		whereMap.put("reviews.idUser", "user.id".toCharArray());
+		whereMap.put("reviews.idProduct", idProduct);
+		request.Where(whereMap);
+		ResultSet resultat = request.ExecuteQuery();
+
 		ArrayList<Reviews> listReview = new ArrayList<Reviews>();
-		try {
-			String req = "SELECT reviews.id, reviews.review, user.firstname FROM reviews, user "
-					+ "WHERE reviews.idUser = user.id AND reviews.idProduct = " + idProduct + ";";
-			System.out.println(req);
-			ResultSet resultat = statement.executeQuery(req);
-			while (resultat.next()) {
-				listReview.add(new Reviews(resultat.getInt("id"), resultat.getString("review"), resultat
-						.getString("firstname")));
+		if (resultat != null) {
+			try {
+				while (resultat.next()) {
+					listReview.add(new Reviews(resultat.getInt("id"), resultat.getString("review"), resultat
+							.getString("firstname")));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DbUtility.closeConnexion(connexion, statement);
 		}
 		return listReview;
 	}
