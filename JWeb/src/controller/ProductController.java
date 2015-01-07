@@ -32,13 +32,13 @@ public class ProductController extends HttpServlet {
 			priceString = "0";
 		Float price = Float.valueOf(priceString);
 		Part part = request.getPart("file");
-		String nomFichier = getNomFichier(part);
+		String nomFichier = getFileName(part);
 		
 		if (!name.equals("") && !description.equals("") && !priceString.equals("") && nomFichier != null && !nomFichier.equals("\"\"") && !nomFichier.isEmpty()) {
 			nomFichier = nomFichier.substring(1, nomFichier.length() - 1);
 			String path = System.getProperty("user.home");
 			path = path + "/git/JWeb/JWeb/WebContent/img/product/";
-			ecrireFichier(part, nomFichier, path);
+			writeFile(part, nomFichier, path);
 			String photoPath = "./img/product/" + nomFichier;
 			Product.createProduct(name, photoPath, description, price);
 			request.setAttribute("success", "creation du produit reussi");
@@ -47,7 +47,7 @@ public class ProductController extends HttpServlet {
 		LoadController.LoadAdmin(request, response);
 	}
 
-	private static String getNomFichier(Part part) {
+	private static String getFileName(Part part) {
 		for (String contentDisposition : part.getHeader("content-disposition")
 				.split(";")) {
 			if (contentDisposition.trim().startsWith("filename")) {
@@ -58,7 +58,7 @@ public class ProductController extends HttpServlet {
 		return null;
 	}
 
-	private void ecrireFichier(Part part, String nomFichier, String chemin)
+	private void writeFile(Part part, String nomFichier, String chemin)
 			throws IOException {
 
 		BufferedInputStream entree = null;
