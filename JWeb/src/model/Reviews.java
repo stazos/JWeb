@@ -32,7 +32,7 @@ public class Reviews {
 	}
 
 	/**
-	 * valid
+	 * creation d'un avis lier a un idProduct et a un idUser avec un review
 	 * 
 	 * @param idProduct
 	 * @param idUser
@@ -46,7 +46,7 @@ public class Reviews {
 	}
 
 	/**
-	 * valid
+	 * obtention d'une liste d'avis avec un idProduct
 	 * 
 	 * @param idProduct
 	 * @return

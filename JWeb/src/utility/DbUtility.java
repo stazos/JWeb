@@ -8,7 +8,7 @@ import java.sql.Statement;
 public class DbUtility {
 
 	Connection connexion = null;
-	
+
 	private DbUtility() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -17,13 +17,17 @@ public class DbUtility {
 		}
 		connexion = connectToDB();
 	}
-	
+
 	private static DbUtility INSTANCE = new DbUtility();
 
 	public static DbUtility getInstance() {
 		return INSTANCE;
 	}
 
+	/**
+	 * synchronisation de la base de donne, supprime toute les tables est les
+	 * recree correctement
+	 */
 	public void synDB() {
 		Statement statement = getConnectStatement();
 		try {
@@ -69,6 +73,11 @@ public class DbUtility {
 		}
 	}
 
+	/**
+	 * connection a la base de donne
+	 * 
+	 * @return
+	 */
 	public Connection connectToDB() {
 		String url = "jdbc:mysql://localhost/jweb";
 		String utilisateur = "root";
@@ -82,7 +91,12 @@ public class DbUtility {
 		}
 		return connexion;
 	}
-	
+
+	/**
+	 * obtention du statement pour faire des requetes
+	 * 
+	 * @return
+	 */
 	public Statement getConnectStatement() {
 		Statement statement = null;
 		try {
@@ -94,6 +108,11 @@ public class DbUtility {
 		return statement;
 	}
 
+	/**
+	 * fermeture de la connexion et du statement
+	 * 
+	 * @param statement
+	 */
 	public void closeConnexion(Statement statement) {
 		if (statement != null) {
 			try {

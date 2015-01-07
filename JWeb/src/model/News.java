@@ -39,7 +39,7 @@ public class News {
 	}
 
 	/**
-	 * valid
+	 * creation d'une news avec un title et une description
 	 * 
 	 * @param title
 	 * @param description
@@ -52,7 +52,7 @@ public class News {
 	}
 
 	/**
-	 * valid
+	 * obtention d'une liste de news
 	 * 
 	 * @return
 	 */
@@ -78,7 +78,7 @@ public class News {
 	}
 
 	/**
-	 * valid
+	 * suppression d'une news grace a sont id
 	 * 
 	 * @param id
 	 */

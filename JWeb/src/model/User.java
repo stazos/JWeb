@@ -50,7 +50,8 @@ public class User {
 	}
 
 	/**
-	 * valid
+	 * creation d'un user avec un firstname, un lastname, un email un password
+	 * et si il souhaite recevoir une newsletter
 	 * 
 	 * @param firstname
 	 * @param lastname
@@ -67,7 +68,7 @@ public class User {
 	}
 
 	/**
-	 * valid
+	 * regarde si un email existe il retour un boolean
 	 * 
 	 * @param email
 	 * @return
@@ -99,7 +100,7 @@ public class User {
 	}
 
 	/**
-	 * valid
+	 * connexion d'un utilisateur grace a son email et son password
 	 * 
 	 * @param email
 	 * @param password
@@ -131,7 +132,7 @@ public class User {
 	}
 
 	/**
-	 * valid
+	 * retourne si l'utilisateur est administrateur ou non
 	 * 
 	 * @param id
 	 * @return
@@ -162,7 +163,7 @@ public class User {
 	}
 
 	/**
-	 * valid
+	 * retourne la liste de tout les utilisateur avec leurs information
 	 * 
 	 * @return
 	 */
@@ -188,7 +189,7 @@ public class User {
 	}
 
 	/**
-	 * valid
+	 * rend admin un utilisateur defini par son id
 	 * 
 	 * @param id
 	 */
@@ -203,7 +204,7 @@ public class User {
 	}
 
 	/**
-	 * valid
+	 * active la newletter pour un utilisteur defini par son id
 	 * 
 	 * @param id
 	 */
@@ -218,7 +219,7 @@ public class User {
 	}
 
 	/**
-	 * valid
+	 * supprime un utilisateur defini par son id
 	 * 
 	 * @param id
 	 */
@@ -233,7 +234,7 @@ public class User {
 	}
 
 	/**
-	 * valid
+	 * supprime la newletter a tout les utilisateurs
 	 */
 	static public void userUnsetNewsletter() {
 		OrmRequest request = new OrmRequest();
@@ -246,7 +247,7 @@ public class User {
 	}
 
 	/**
-	 * valid
+	 * supprime les droit administrateur a tout les utilisateurs
 	 */
 	static public void userUnsetAdmin() {
 		OrmRequest request = new OrmRequest();

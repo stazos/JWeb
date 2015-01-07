@@ -10,7 +10,7 @@ import orm.OrmRequest;
 public class Panier {
 
 	/**
-	 * valid
+	 * creation d'un panier qui va lier un idUser a un idProduct
 	 * 
 	 * @param idUser
 	 * @param idProduct
@@ -23,7 +23,7 @@ public class Panier {
 	}
 
 	/**
-	 * valid
+	 * obtention d'une liste de produit contenu dans le panier d'un idUser
 	 * 
 	 * @param idUser
 	 * @return
@@ -53,7 +53,7 @@ public class Panier {
 	}
 
 	/**
-	 * valid
+	 * obtention du nombre de produit contenu dans le panier de l'idUser
 	 * 
 	 * @param idUser
 	 * @return
@@ -80,7 +80,8 @@ public class Panier {
 	}
 
 	/**
-	 * valid
+	 * suppression de tout les produit du panier de l'idUser
+	 * 
 	 * @param idUser
 	 */
 	static public void rmAllProductPanier(int idUser) {

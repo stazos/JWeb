@@ -44,7 +44,8 @@ public class Product {
 	}
 
 	/**
-	 * valid
+	 * creation du produit avec un name le path d'une photo une description et
+	 * un price
 	 * 
 	 * @param name
 	 * @param photo
@@ -59,7 +60,7 @@ public class Product {
 	}
 
 	/**
-	 * valid
+	 * obtention de d'un list de tout les produits
 	 * 
 	 * @return
 	 */
@@ -84,7 +85,7 @@ public class Product {
 	}
 
 	/**
-	 * valid
+	 * obtention d'un information d'un produit grace a son id
 	 * 
 	 * @param id
 	 * @return
@@ -113,7 +114,7 @@ public class Product {
 	}
 
 	/**
-	 * valid
+	 * suppression de produit grace a son id
 	 * 
 	 * @param id
 	 */
