@@ -10,11 +10,6 @@ import utility.DbUtility;
 
 public class OrmRequest {
 
-	public enum RequestType {
-		SELECT, INSERT, UPDATE, DELETE;
-	}
-
-	RequestType type;
 	String request;
 
 	public OrmRequest() {
@@ -22,7 +17,6 @@ public class OrmRequest {
 	}
 
 	public void Select(String... Args) {
-		type = RequestType.SELECT;
 		int i = 0;
 		request = "SELECT ";
 		for (String str : Args) {
